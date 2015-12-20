@@ -2,12 +2,10 @@ package com.huangyuanlove.liaoba;
 
 
 import android.animation.Animator;
-import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -55,7 +53,7 @@ public class ChatFragment extends Fragment {
     private List<Message> messageList = new ArrayList<>();
     private RequestQueue requestQueue;
     private int currentResponseCode;
-    private Button sendMsg ;
+    private Button sendMsg;
 
     private ActionBar actionBar;
     private float mFirst;
@@ -65,10 +63,9 @@ public class ChatFragment extends Fragment {
     private Animator mAnimatorListView;
 
 
-    public interface ChatFragmentCallBack{
+    public interface ChatFragmentCallBack {
         void transe(EditText editText);
     }
-
 
 
     @Override
@@ -79,14 +76,14 @@ public class ChatFragment extends Fragment {
         //获取系统认为最低的滑动距离，也就是说超过这个距离的移动，系统就认为是滑动状态了
         final int mTouchSlop = ViewConfiguration.get(getActivity()).getScaledTouchSlop();
 
-        actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+        actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
 
 
         MyApplication myApplication = (MyApplication) getActivity().getApplication();
 
         requestQueue = myApplication.getRequestQueue();
         sendMsg = (Button) view.findViewById(R.id.send_msg_button);
-        ((ChatFragmentCallBack)getActivity()).transe(inputText);
+        ((ChatFragmentCallBack) getActivity()).transe(inputText);
 
 
         messageListView = (ListView) view.findViewById(R.id.msg_listView);
@@ -95,18 +92,17 @@ public class ChatFragment extends Fragment {
         messageListView.setAdapter(messageAdapter);
 
 
-
         //设置事件监听
         messageListView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
-                        mFirst = DisplayUnitTranslatUtils.px2dip(getActivity(),event.getY());
+                        mFirst = DisplayUnitTranslatUtils.px2dip(getActivity(), event.getY());
 
                         break;
                     case MotionEvent.ACTION_MOVE:
-                        mCurrentY = DisplayUnitTranslatUtils.px2dip(getActivity(),event.getY());
+                        mCurrentY = DisplayUnitTranslatUtils.px2dip(getActivity(), event.getY());
 
                         if (mCurrentY - mFirst > mTouchSlop) {
 
@@ -124,7 +120,6 @@ public class ChatFragment extends Fragment {
                 return false;
             }
         });
-
 
 
         sendMsg.setOnClickListener(new View.OnClickListener() {

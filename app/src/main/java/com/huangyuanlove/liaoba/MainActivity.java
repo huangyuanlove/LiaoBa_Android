@@ -30,11 +30,10 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, OnMenuItemClickListener, OnMenuItemLongClickListener,ChatFragment.ChatFragmentCallBack {
 
-    private ResideMenu resideMenu;
-    private double mExitTime;
+    private ResideMenu mResideMenu;
     private ContextMenuDialogFragment mMenuDialogFragment;
-    private FragmentManager fragmentManager;
-    private EditText editText;
+    private FragmentManager mFragmentManager;
+    private EditText mEditText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,15 +41,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         initMenuFragment();
         initResideMenu();
-        fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
+        mFragmentManager = getSupportFragmentManager();
+        mFragmentManager.beginTransaction()
                 .replace(R.id.chat_fragment, new ChatFragment())
                 .addToBackStack(null)
                 .commit();
     }
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        return resideMenu.dispatchTouchEvent(ev);
+        return mResideMenu.dispatchTouchEvent(ev);
     }
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
@@ -62,23 +61,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_show_item:
-                if (fragmentManager.findFragmentByTag(ContextMenuDialogFragment.TAG) == null) {
-                    mMenuDialogFragment.show(fragmentManager, ContextMenuDialogFragment.TAG);
+                if (mFragmentManager.findFragmentByTag(ContextMenuDialogFragment.TAG) == null) {
+                    mMenuDialogFragment.show(mFragmentManager, ContextMenuDialogFragment.TAG);
                 }
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
+    
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            if ((System.currentTimeMillis() - mExitTime) > 2000) {
-                Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
-                mExitTime = System.currentTimeMillis();
-            } else {
-                System.exit(0);
-                finish();
-            }
+            moveTaskToBack(false);
             return true;
         }
         return super.onKeyDown(keyCode, event);
@@ -189,9 +183,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initResideMenu()
     {
         // attach to current activity;
-        resideMenu = new ResideMenu(this);
-        resideMenu.setBackground(R.drawable.menu_background);
-        resideMenu.attachToActivity(this);
+        mResideMenu = new ResideMenu(this);
+        mResideMenu.setBackground(R.drawable.menu_background);
+        mResideMenu.attachToActivity(this);
 
         // create menu items;
         String titles[] = { "注销", "隐藏属性", "软件设置", "关于作者" };
@@ -204,9 +198,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             ResideMenuItem item = new ResideMenuItem(this, icon[i], titles[i]);
             item.setOnClickListener(this);
             item.setTag(i);
-            resideMenu.addMenuItem(item,  ResideMenu.DIRECTION_LEFT); // or  ResideMenu.DIRECTION_RIGHT
+            mResideMenu.addMenuItem(item,  ResideMenu.DIRECTION_LEFT); // or  ResideMenu.DIRECTION_RIGHT
         }
-        resideMenu.setSwipeDirectionDisable(ResideMenu.DIRECTION_RIGHT);
+        mResideMenu.setSwipeDirectionDisable(ResideMenu.DIRECTION_RIGHT);
     }
 
     @Override
@@ -214,28 +208,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (position)
         {
             case 1:
-                editText.setText("随便说点什么");
+                mEditText.setText("随便说点什么");
                 break;
             case 2:
-                editText.setText("北京天气");
+                mEditText.setText("北京天气");
                 break;
             case 3:
-                editText.setText("XX快递 快递单号");
+                mEditText.setText("XX快递 快递单号");
                 break;
             case 4:
-                editText.setText("讲个笑话");
+                mEditText.setText("讲个笑话");
                 break;
             case 5:
-                editText.setText("明天北京到拉萨的飞机");
+                mEditText.setText("明天北京到拉萨的飞机");
                 break;
             case 6:
-                editText.setText("3的27次方");
+                mEditText.setText("3的27次方");
                 break;
             case 7:
-                editText.setText("北京到青岛的火车");
+                mEditText.setText("北京到青岛的火车");
                 break;
             case 8:
-                editText.setText("美女图片");
+                mEditText.setText("美女图片");
                 break;
         }
     }
@@ -247,6 +241,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void transe(EditText editText) {
-        this.editText = editText;
+        this.mEditText = editText;
     }
+
+   
 }

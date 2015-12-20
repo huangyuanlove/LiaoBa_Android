@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -18,6 +17,7 @@ import android.widget.Toast;
 import com.huangyuanlove.liaoba.customui.indris.material.RippleView;
 import com.huangyuanlove.liaoba.customui.titanic.Titanic;
 import com.huangyuanlove.liaoba.customui.titanic.TitanicTextView;
+import com.huangyuanlove.liaoba.utils.ActivityCollector;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -28,6 +28,7 @@ import java.util.TimerTask;
  * Date: 2015/10/21
  */
 public class LoginActivity extends BaseActivity {
+    private double mExitTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +52,7 @@ public class LoginActivity extends BaseActivity {
         SharedPreferences sharedPreferences = getSharedPreferences(getResources().getString(R.string.sharedPreferencesName), Context.MODE_APPEND);
         final SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        username_editText.setText(sharedPreferences.getString("username",""));
+        username_editText.setText(sharedPreferences.getString("username", ""));
 
         RippleView loginButton = (RippleView) findViewById(R.id.login_button);
         RippleView registerButton = (RippleView) findViewById(R.id.register_button);
@@ -103,7 +104,7 @@ public class LoginActivity extends BaseActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
             }
         });
@@ -111,15 +112,20 @@ public class LoginActivity extends BaseActivity {
 
     }
 
-
-
-
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (KeyEvent.KEYCODE_BACK == keyCode && getFragmentManager().getBackStackEntryCount()==1)
-        {
-            finish();
+
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if ((System.currentTimeMillis() - mExitTime) > 2000) {
+                Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+                mExitTime = System.currentTimeMillis();
+            } else {
+                ActivityCollector.finishAll();
+            }
+            return true;
         }
         return super.onKeyDown(keyCode, event);
     }
+
+
 }

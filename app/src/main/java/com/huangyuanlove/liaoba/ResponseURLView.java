@@ -1,12 +1,10 @@
 package com.huangyuanlove.liaoba;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
-import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -39,7 +37,7 @@ public class ResponseURLView extends BaseActivity {
         webSettings.setUseWideViewPort(true);
         webSettings.setLoadWithOverviewMode(true);
 
-        webView.setWebViewClient(new WebViewClient(){
+        webView.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageFinished(WebView view, String url) {
                 progressDialog.dismiss();
@@ -47,13 +45,12 @@ public class ResponseURLView extends BaseActivity {
         });
 
         webView.loadUrl(url);
-        progressDialog = ProgressDialog.show(this,null,"正在加载······");
+        progressDialog = ProgressDialog.show(this, null, "正在加载······");
     }
 
-    public static void actionStart(Context context, String url)
-    {
-        Intent intent = new Intent(context,ResponseURLView.class);
-        intent.putExtra("url",url);
+    public static void actionStart(Context context, String url) {
+        Intent intent = new Intent(context, ResponseURLView.class);
+        intent.putExtra("url", url);
         context.startActivity(intent);
     }
 }

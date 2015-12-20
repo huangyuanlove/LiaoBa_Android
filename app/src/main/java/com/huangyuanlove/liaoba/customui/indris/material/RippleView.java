@@ -21,7 +21,6 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.*;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Button;
@@ -103,9 +102,7 @@ public class RippleView extends Button {
 
     @Override
     public boolean onTouchEvent(final MotionEvent event) {
-        Log.d("TouchEvent", String.valueOf(event.getActionMasked()));
-        Log.d("mIsAnimating", String.valueOf(mIsAnimating));
-        Log.d("mAnimationIsCancel", String.valueOf(mAnimationIsCancel));
+
         boolean superResult = super.onTouchEvent(event);
         if (event.getActionMasked() == MotionEvent.ACTION_DOWN
                 && this.isEnabled() && mHover) {
