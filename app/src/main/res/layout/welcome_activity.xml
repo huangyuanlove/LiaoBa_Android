@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+
+
+    <com.huangyuanlove.liaoba.customui.SecretTextView
+            android:id="@+id/secretTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="陪你度过无聊的时间"
+            android:textSize="24sp"
+            android:textColor="#00bbcc"
+            android:layout_centerInParent="true"
+            />
+    <com.huangyuanlove.liaoba.customui.titanic.TitanicTextView
+            android:id="@+id/titanic_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="聊吧"
+            android:textColor="#eeac00"
+            android:textSize="88dp"
+            android:layout_above="@id/secretTextView"
+            android:layout_centerHorizontal="true"
+            />
+
+
+</RelativeLayout>
