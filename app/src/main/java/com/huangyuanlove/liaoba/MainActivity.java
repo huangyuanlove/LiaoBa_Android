@@ -1,8 +1,10 @@
 package com.huangyuanlove.liaoba;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -83,11 +85,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     @Override
     public void onClick(View v) {
-        Intent intent = null;
+
         switch ((int)v.getTag())
         {
             case Config.MENU_CHECK_UPDATE:
-                Toast.makeText(this,"已经是最新版本",Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(this,"注销",Toast.LENGTH_SHORT).show();
+                final Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+                AlertDialog alertDialog = new AlertDialog.Builder(this)
+                        .setCancelable(true)
+                        .setTitle("确认注销？")
+                        .setNegativeButton("取消", null)
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                startActivity(intent);
+                                MainActivity.this.finish();
+
+                            }
+                        })
+                        .create();
+                alertDialog.show();
                 break;
             case Config.MENU_HIDE_FUNCTION:
                 Toast.makeText(this,"还没有开启隐藏功能",Toast.LENGTH_SHORT).show();
@@ -176,8 +194,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         resideMenu.attachToActivity(this);
 
         // create menu items;
-        String titles[] = { "检查更新", "隐藏属性", "软件设置", "关于作者" };
-        int icon[] = { R.drawable.check_update,
+        String titles[] = { "注销", "隐藏属性", "软件设置", "关于作者" };
+        int icon[] = { R.drawable.logout,
                 R.drawable.hide_function,
                 R.drawable.setting,
                 R.drawable.about_me };

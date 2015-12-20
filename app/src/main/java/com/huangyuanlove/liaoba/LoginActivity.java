@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -64,14 +65,14 @@ public class LoginActivity extends BaseActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if ("".equals(username_editText.getText().toString())) {
+                if ("".equals(username_editText.getText().toString().trim())) {
                     Animation shake = AnimationUtils.loadAnimation(LoginActivity.this, R.anim.shake);
                     username_editText.startAnimation(shake);
                     Toast.makeText(LoginActivity.this, "用户名不可为空！", Toast.LENGTH_SHORT).show();
 
                     return;
                 }
-                if ("".equals(password_editText.getText().toString())) {
+                if ("".equals(password_editText.getText().toString().trim())) {
                     Animation shake = AnimationUtils.loadAnimation(LoginActivity.this, R.anim.shake);
                     password_editText.startAnimation(shake);
                     Toast.makeText(LoginActivity.this, "密码不可为空！", Toast.LENGTH_SHORT).show();
@@ -82,14 +83,11 @@ public class LoginActivity extends BaseActivity {
                 new Timer().schedule(new TimerTask() {
                     @Override
                     public void run() {
-                        if(saveStatus.isChecked())
-                        {
+                        if (saveStatus.isChecked()) {
                             editor.putBoolean("isSaveStatus", true).apply();
-                            editor.putString("username",username_editText.getText().toString()).apply();
-                        }
-                        else
-                        {
-                            editor.putBoolean("isSaveStatus",false).apply();
+                            editor.putString("username", username_editText.getText().toString()).apply();
+                        } else {
+                            editor.putBoolean("isSaveStatus", false).apply();
 
                         }
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
@@ -97,7 +95,16 @@ public class LoginActivity extends BaseActivity {
                         LoginActivity.this.finish();
                     }
                 }, 2000);
-                        password_editText.setText("");
+                password_editText.setText("");
+            }
+        });
+
+
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -105,8 +112,9 @@ public class LoginActivity extends BaseActivity {
     }
 
 
-    @Override
 
+
+    @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (KeyEvent.KEYCODE_BACK == keyCode && getFragmentManager().getBackStackEntryCount()==1)
         {
