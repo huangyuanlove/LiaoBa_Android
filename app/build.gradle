@@ -8,8 +8,8 @@ android {
         applicationId "com.huangyuanlove.liaoba"
         minSdkVersion 19
         targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
+        versionCode 314
+        versionName "挑战"
     }
     buildTypes {
         release {
@@ -27,4 +27,11 @@ dependencies {
     compile 'com.mcxiaoke.volley:library:1.0.19'
     compile 'com.google.code.gson:gson:2.5'
     compile 'com.android.support:support-v4:23.1.1'
+    compile files('libs/baidumapapi_base_v3_6_1.jar')
+    compile files('libs/baidumapapi_cloud_v3_6_1.jar')
+    compile files('libs/baidumapapi_map_v3_6_1.jar')
+    compile files('libs/baidumapapi_radar_v3_6_1.jar')
+    compile files('libs/baidumapapi_search_v3_6_1.jar')
+    compile files('libs/baidumapapi_util_v3_6_1.jar')
+    compile files('libs/locSDK_6.13.jar')
 }

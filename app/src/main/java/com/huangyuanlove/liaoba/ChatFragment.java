@@ -2,6 +2,7 @@ package com.huangyuanlove.liaoba;
 
 
 import android.animation.Animator;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
@@ -22,7 +23,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.huangyuanlove.liaoba.adapter.MessageAdapter;
 import com.huangyuanlove.liaoba.entity.Message;
 import com.huangyuanlove.liaoba.entity.ResponseLink;
@@ -58,9 +58,8 @@ public class ChatFragment extends Fragment {
     private ActionBar actionBar;
     private float mFirst;
     private float mCurrentY;
-    private int direction;
-    private Animator mAnimatorToolBar;
-    private Animator mAnimatorListView;
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
 
 
     public interface ChatFragmentCallBack {
@@ -125,10 +124,24 @@ public class ChatFragment extends Fragment {
         sendMsg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String content = inputText.getText().toString();
+                final String content = inputText.getText().toString().trim();
                 if (!"".equals(content))
-
                 {
+                    sharedPreferences = ((MyApplication) getActivity().getApplication()).getSharedPreferences();
+                    editor = sharedPreferences.edit();
+                    if (content.contains("游戏") || content.contains("挑战")) {
+                        editor.putBoolean("game",true).apply();
+                        Toast.makeText(getActivity(),"恭喜解锁隐藏功能，请到隐藏属性菜单查看",Toast.LENGTH_SHORT).show();
+                    }
+
+                    if (content.contains("地图")) {
+                        editor.putBoolean("map",true).commit();
+                        Toast.makeText(getActivity(),"恭喜解锁隐藏功能，请到隐藏属性菜单查看",Toast.LENGTH_SHORT).show();
+                    }
+                    if (content.contains("音乐")) {
+                        editor.putBoolean("music",true).commit();
+                        Toast.makeText(getActivity(),"恭喜解锁隐藏功能，请到隐藏属性菜单查看",Toast.LENGTH_SHORT).show();
+                    }
 
                     String info = content;
                     try {

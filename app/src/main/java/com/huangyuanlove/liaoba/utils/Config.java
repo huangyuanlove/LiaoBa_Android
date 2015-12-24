@@ -5,6 +5,18 @@ package com.huangyuanlove.liaoba.utils;
  */
 public class Config {
 
+    //用于音乐播放的常量
+    public static final String ACTION_PROGRESS = "pub.huangyuan.broadcast.progress";
+    public static final String ACTION_SEEKTO = "pub.huangyuan.broadcast.seekto";
+    public static final String EXSTRA_PROGRESS_MAX = "prg_max";
+    public static final String EXSTRA_PROGRESS_CUR = "prg_current";
+    //存放boolean，true ： 播放新文件，  false： 播放与暂停
+    public static final String EXSTRA_CHANGE="change";
+    //新文件路径
+    public static final String EXSTRA_PATH="path";
+
+
+    //用于隐藏菜单的常量
     public static final int MENU_CHECK_UPDATE = 0;
     public static final int MENU_HIDE_FUNCTION = 1;
     public static final int MENU_SETTING = 2;
@@ -12,8 +24,6 @@ public class Config {
 
     //图灵机器人接口
     public static final String TURING_ROBOT_BASH_URL = "http://www.tuling123.com/openapi/api?key=28ae93a45250dbd6bfc4e574d945f8b5&info=%s";
-
-
     //图灵机器人返回码
     //文本类
     public static final int RESPONSE_TYPE_TEXT = 100000;

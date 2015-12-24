@@ -1,6 +1,8 @@
 package com.huangyuanlove.liaoba;
 
 import android.app.Application;
+import android.content.Context;
+import android.content.SharedPreferences;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
@@ -10,10 +12,25 @@ import com.android.volley.toolbox.Volley;
  */
 public class MyApplication extends Application {
     private RequestQueue requestQueue;
+    private SharedPreferences sharedPreferences;
+//    =            getSharedPreferences("hide_function", Context.MODE_PRIVATE);
+
+
     public RequestQueue getRequestQueue(){
         if (requestQueue == null){
             requestQueue = Volley.newRequestQueue(this);
         }
         return requestQueue;
     }
+
+    public SharedPreferences getSharedPreferences()
+    {
+        if (sharedPreferences== null)
+        {
+            sharedPreferences = getSharedPreferences("hide_function", Context.MODE_PRIVATE);
+        }
+        return sharedPreferences;
+    }
+
+
 }

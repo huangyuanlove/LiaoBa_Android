@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    >
+
+
+    <com.huangyuanlove.liaoba.customui.indris.material.RippleView
+        android:layout_gravity="center"
+        android:id="@+id/hide_function_game"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="24dp"
+        android:background="@drawable/rippleview_background"
+        app:rippleColor="#ff797979"
+        android:padding="12dp"
+        android:text="游戏"
+        android:textSize="24sp"
+        android:visibility="gone"
+        />
+
+    <com.huangyuanlove.liaoba.customui.indris.material.RippleView
+        android:layout_gravity="center"
+        android:id="@+id/hide_function_map"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="24dp"
+        android:background="@drawable/rippleview_background"
+        app:rippleColor="#ff797979"
+        android:padding="12dp"
+        android:text="地图"
+        android:textSize="24sp"
+        android:visibility="gone"/>
+    <com.huangyuanlove.liaoba.customui.indris.material.RippleView
+        android:layout_gravity="center"
+        android:id="@+id/hide_function_music"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="24dp"
+        android:background="@drawable/rippleview_background"
+        app:rippleColor="#ff797979"
+        android:padding="12dp"
+        android:text="音乐"
+        android:textSize="24sp"
+        android:visibility="gone"/>
+</LinearLayout>
