@@ -9,7 +9,7 @@ android {
         minSdkVersion 19
         targetSdkVersion 23
         versionCode 314
-        versionName "挑战"
+        versionName "机遇"
     }
     buildTypes {
         release {

@@ -296,7 +296,6 @@ public class BaiduMapActivity extends AppCompatActivity {
                                                 .fontColor(0XFFFFFF00)
                                                 .text(allStep.get(i).getInstructions())
                                                 .position(location);
-                                        Log.d("xuanxuan",allStep.get(i).getInstructions());
                                         baiduMapView.getMap().addOverlay(textOption);
                                     }
 
