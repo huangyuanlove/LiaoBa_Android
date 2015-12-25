@@ -41,7 +41,6 @@ public class PlayMusicActivity extends AppCompatActivity {
 
     SimpleDateFormat sdf = new SimpleDateFormat("mm:ss");
 
-
     // 获取扩展卡下的所有的音频文件接口
     private Uri mp3Uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
     private String[] columns = { MediaStore.Audio.Media._ID,
@@ -77,15 +76,11 @@ public class PlayMusicActivity extends AppCompatActivity {
 
             @Override
             public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-                // TODO Auto-generated method stub
                 return new CursorLoader(getApplicationContext(), mp3Uri, columns, null,null,null);
             }
 
             @Override
             public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-                // TODO Auto-generated method stub
-
-
                 adapter.swapCursor(data);
             }
 
@@ -123,8 +118,9 @@ public class PlayMusicActivity extends AppCompatActivity {
         adapter = new SimpleCursorAdapter(getApplicationContext(),
                 R.layout.item_audio,
                 null,
-                new String[]{columns[1],columns[2],columns[3]},
-                new int[]{R.id.nameId,R.id.pathID,R.id.timeId},
+//                new String[]{columns[1],columns[2],columns[3]},
+                new String[]{columns[1],columns[3]},
+                new int[]{R.id.nameId,R.id.timeId},
                 SimpleCursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER){
             @Override
             public void setViewText(TextView v, String text) {
@@ -143,9 +139,6 @@ public class PlayMusicActivity extends AppCompatActivity {
             }
         };
 
-
-
-
         listView.setAdapter(adapter);
 
     }
@@ -163,15 +156,11 @@ public class PlayMusicActivity extends AppCompatActivity {
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-                // TODO Auto-generated method stub
-
             }
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress,
                                           boolean fromUser) {
-                // TODO Auto-generated method stub
-
             }
         });
 
@@ -201,7 +190,6 @@ public class PlayMusicActivity extends AppCompatActivity {
         public void onReceive(Context context, Intent intent) {
             int maxLen = intent.getIntExtra(Config.EXSTRA_PROGRESS_MAX, 0);
             int currentLen = intent.getIntExtra(Config.EXSTRA_PROGRESS_CUR, 0);
-
 
             String totleTime = sdf.format(maxLen);
             String currentTime = sdf.format(currentLen);

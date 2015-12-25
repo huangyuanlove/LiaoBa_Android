@@ -8,7 +8,6 @@ import android.content.IntentFilter;
 import android.media.MediaPlayer;
 import android.os.IBinder;
 import android.support.v4.content.LocalBroadcastManager;
-import android.util.Log;
 
 import com.huangyuanlove.liaoba.R;
 import com.huangyuanlove.liaoba.utils.Config;
@@ -25,7 +24,6 @@ public class PlayerService extends Service {
     private SeekToReceiver myReceiver;
     @Override
     public void onCreate() {
-        //
         super.onCreate();
 
         // 实例化MediaPalyer
@@ -58,9 +56,6 @@ public class PlayerService extends Service {
                 e.printStackTrace();
             }
         }
-
-
-
         // 判断当前的MediaPlayer是否正在播放
         if (mPlayer.isPlaying()) {
             mPlayer.pause();
@@ -81,8 +76,7 @@ public class PlayerService extends Service {
 
     @Override
     public void onDestroy() {
-        // TODO Auto-generated method stub
-
+        mPlayer.pause();
         mPlayer.stop();
         mPlayer.release();
         localBroadcastManager.unregisterReceiver(myReceiver);
@@ -109,8 +103,6 @@ public class PlayerService extends Service {
             }
         }
     }
-
-
 
     class SeekToReceiver extends BroadcastReceiver
     {
