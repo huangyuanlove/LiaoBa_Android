@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -45,10 +46,9 @@ public class PlayMusicActivity extends AppCompatActivity {
     private Uri mp3Uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
     private String[] columns = { MediaStore.Audio.Media._ID,
             MediaStore.Audio.Media.DISPLAY_NAME,//文件名
-            MediaStore.Audio.Media.DATA, //文件路径
-            MediaStore.Audio.Media.DURATION//音频时长
+            MediaStore.Audio.Media.DURATION,//音频时长
+            MediaStore.Audio.Media.DATA//文件路径
     };
-
 
     private ListView listView;
     private SimpleCursorAdapter adapter;
@@ -99,13 +99,9 @@ public class PlayMusicActivity extends AppCompatActivity {
                 // TODO Auto-generated method stub
                 Cursor cursor = adapter.getCursor();
                 cursor.moveToPosition(position);
-                String name = cursor.getString(1);
-                String path = cursor.getString(2);
-
+                String path = cursor.getString(3);
                 playerIntent.putExtra(Config.EXSTRA_CHANGE, true);
                 playerIntent.putExtra(Config.EXSTRA_PATH, path);
-
-
                 startService(playerIntent);
 
             }
@@ -118,8 +114,7 @@ public class PlayMusicActivity extends AppCompatActivity {
         adapter = new SimpleCursorAdapter(getApplicationContext(),
                 R.layout.item_audio,
                 null,
-//                new String[]{columns[1],columns[2],columns[3]},
-                new String[]{columns[1],columns[3]},
+                new String[]{columns[1],columns[2]},
                 new int[]{R.id.nameId,R.id.timeId},
                 SimpleCursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER){
             @Override
@@ -128,7 +123,7 @@ public class PlayMusicActivity extends AppCompatActivity {
 
                 if(v.getId() == R.id.timeId)
                 {
-                    if(text == "" || text==null)
+                    if(text == "" || text == null)
                         v.setText("");
                     else
                     {
@@ -195,7 +190,6 @@ public class PlayMusicActivity extends AppCompatActivity {
             String currentTime = sdf.format(currentLen);
 
             timeTextView.setText(currentTime + "/" +  totleTime);
-
             seekBar.setMax(maxLen);
             seekBar.setProgress(currentLen);
         }

@@ -119,9 +119,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Map<String, ?> hideFunction = sharedPreferences.getAll();
                 if (hideFunction.isEmpty()) {
                     Toast.makeText(this, "还没有开启隐藏功能", Toast.LENGTH_SHORT).show();
-                    return ;
+                    return;
                 } else {
-                    //TODO 完成地图和音乐界面后修改此处
                     if (hideFunction.containsKey("game")) {
                         initHideFunctionView(gameButton, Five_Five_Activity.class);
                     }
@@ -148,7 +147,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
-
 
     private List<MenuObject> getMenuObjects() {
 

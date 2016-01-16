@@ -27,7 +27,7 @@ import java.util.TimerTask;
  * Author: huangyuan_xuan
  * Date: 2015/10/21
  */
-public class LoginActivity extends BaseActivity {
+public class LoginActivity extends BaseActivity  {
     private double mExitTime;
 
     @Override
@@ -93,7 +93,7 @@ public class LoginActivity extends BaseActivity {
                         }
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
-                        overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         LoginActivity.this.finish();
                     }
                 }, 2000);
@@ -107,10 +107,9 @@ public class LoginActivity extends BaseActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
-                overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+                overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
             }
         });
-
 
     }
 
@@ -128,6 +127,7 @@ public class LoginActivity extends BaseActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
+
 
 
 }

@@ -1,12 +1,10 @@
 package com.huangyuanlove.liaoba.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -21,36 +19,51 @@ import java.util.List;
  * Author: huangyuan_xuan
  * Date: 2015/10/16
  */
-public class MessageAdapter extends ArrayAdapter<Message> {
+public class MessageAdapter extends BaseAdapter  {
 
     private int resourceID;
     private Context context;
+    private List<Message> datas;
     public MessageAdapter(Context context, int resource, List<Message> objects) {
-        super(context, resource, objects);
-        resourceID = resource;
+//        super(context, resource, objects);
+
+        this.resourceID = resource;
         this.context = context;
+        this.datas = objects;
     }
+
+    @Override
+    public int getCount() {
+        return datas.size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return datas.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view;
-        Message msg = getItem(position);
+        Message msg = datas.get(position);
+
         ViewHolder viewHolder;
         if (convertView == null) {
-            view = LayoutInflater.from(getContext()).inflate(resourceID, null);
+            view = LayoutInflater.from(context).inflate(resourceID, null);
             viewHolder = new ViewHolder();
             viewHolder.leftLayout = (LinearLayout) view.findViewById(R.id.left_layout);
             viewHolder.rightLayout = (LinearLayout) view.findViewById(R.id.right_layout);
             viewHolder.leftMessage = (TextView) view.findViewById(R.id.left_message);
+            viewHolder.leftMessage.setTag(position);
             viewHolder.rightMessage = (TextView) view.findViewById(R.id.right_message);
-
-            ((Activity)context).registerForContextMenu(viewHolder.leftMessage);
-            viewHolder.rightMessage.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    return true;
-                }
-            });
+            viewHolder.rightMessage.setTag(position);
 
             view.setTag(viewHolder);
         } else {
@@ -62,6 +75,7 @@ public class MessageAdapter extends ArrayAdapter<Message> {
             viewHolder.leftLayout.setVisibility(View.VISIBLE);
             viewHolder.rightLayout.setVisibility(View.GONE);
             viewHolder.leftMessage.setText(msg.getContent());
+
         } else if (msg.getType() == Message.MSG_TYPE_SENT) {
             viewHolder.leftLayout.setVisibility(View.GONE);
             viewHolder.rightLayout.setVisibility(View.VISIBLE);
@@ -70,6 +84,8 @@ public class MessageAdapter extends ArrayAdapter<Message> {
 
         return view;
     }
+
+
 
     class ViewHolder {
         LinearLayout leftLayout;

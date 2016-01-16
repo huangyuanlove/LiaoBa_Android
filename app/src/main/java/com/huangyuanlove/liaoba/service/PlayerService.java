@@ -22,23 +22,17 @@ public class PlayerService extends Service {
     private int sumLen;
     private LocalBroadcastManager localBroadcastManager;
     private SeekToReceiver myReceiver;
+
     @Override
     public void onCreate() {
         super.onCreate();
-
         // 实例化MediaPalyer
-
         mPlayer = MediaPlayer
                 .create(getApplicationContext(), R.raw.leidegaobai);
-
         localBroadcastManager = LocalBroadcastManager
                 .getInstance(getApplicationContext());
-
         myReceiver = new SeekToReceiver();
-
         localBroadcastManager.registerReceiver(myReceiver, new IntentFilter(Config.ACTION_SEEKTO));
-
-
     }
 
     @Override
@@ -63,22 +57,18 @@ public class PlayerService extends Service {
             mPlayer.start();
             new ProgressThread().start();
         }
-
-
         return super.onStartCommand(intent, flags, startId);
     }
 
     @Override
     public IBinder onBind(Intent intent) {
-        // TODO Auto-generated method stub
         return null;
     }
 
     @Override
     public void onDestroy() {
-        mPlayer.pause();
         mPlayer.stop();
-        mPlayer.release();
+//        mPlayer.release();
         localBroadcastManager.unregisterReceiver(myReceiver);
         super.onDestroy();
     }
@@ -98,14 +88,12 @@ public class PlayerService extends Service {
                     Thread.sleep(200);
                 }
             } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
     }
 
-    class SeekToReceiver extends BroadcastReceiver
-    {
+    class SeekToReceiver extends BroadcastReceiver {
 
         @Override
         public void onReceive(Context context, Intent intent) {

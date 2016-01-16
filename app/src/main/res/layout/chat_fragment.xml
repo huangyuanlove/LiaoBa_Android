@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/emptyTextView"
@@ -14,13 +15,18 @@
         android:text="你好，我是xuan，随便说点什么吧。"
         />
 
-    <com.huangyuanlove.liaoba.customui.ElasticListView
-            android:id="@+id/msg_listView"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:divider="#00000000"
-            />
+    <com.mobeta.android.dslv.DragSortListView
+        android:id="@+id/msg_listView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        app:float_alpha="0.3"
+        app:float_background_color="@color/bright_foreground_disabled_material_dark"
+        app:remove_enabled="true"
+        app:remove_mode="flingRemove"
+        app:drag_start_mode="onLongPress"
+
+        />
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
