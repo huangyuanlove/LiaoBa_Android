@@ -1,16 +1,16 @@
 package com.huangyuanlove.liaoba;
 
-
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -55,15 +55,12 @@ public class ChatFragment extends Fragment {
     private RequestQueue requestQueue;
     private int currentResponseCode;
     private Button sendMsg;
-
+    private ClipboardManager clipboardManager;
     private ActionBar actionBar;
-    private float mFirst;
-    private float mCurrentY;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
-    private int listViewItemPosition;
     private PopupMenu pm;
-
+    private Menu menu;
     public interface ChatFragmentCallBack {
         void transe(EditText editText);
     }
@@ -72,10 +69,9 @@ public class ChatFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.chat_fragment, null);
-        pm = new PopupMenu(getActivity(), inflater.inflate(R.layout.chat_fragment_popupwindow,null));
         inputText = (EditText) view.findViewById(R.id.input_msg);
         TextView emptyTextView = (TextView) view.findViewById(R.id.emptyTextView);
-
+        clipboardManager = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
         actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
 
 
@@ -112,26 +108,27 @@ public class ChatFragment extends Fragment {
         messageListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                Toast.makeText(getActivity(),"单击事件",Toast.LENGTH_SHORT).show();
                 final Message message = (Message) parent.getItemAtPosition(position);
+                pm = new PopupMenu(getActivity(),view);
+                menu = pm.getMenu();
+                getActivity().getMenuInflater().inflate(R.menu.msg_popup_menu,menu);
                 pm.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
-                            case R.id.popupwindow_copy:
-                                Toast.makeText(getActivity(),message.getContent(),Toast.LENGTH_SHORT).show();
+                            case R.id.options_menu_copy:
+                                clipboardManager.setText(message.getContent());
+                                Toast.makeText(getActivity(), message.getContent(), Toast.LENGTH_SHORT).show();
                                 break;
-                            case R.id.popupwindow_delete:
+                            case R.id.options_menu_delete:
                                 messageList.remove(position);
                                 messageAdapter.notifyDataSetChanged();
-                                Toast.makeText(getActivity(), "点击了删除", Toast.LENGTH_SHORT).show();
-
                                 break;
                         }
                         return false;
                     }
                 });
-
+                pm.show();
             }
         });
 
@@ -215,4 +212,5 @@ public class ChatFragment extends Fragment {
 
         return view;
     }
+
 }
