@@ -23,25 +23,21 @@ public class Five_Five_Adapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        // TODO Auto-generated method stub
         return 25;
     }
 
     @Override
     public Object getItem(int position) {
-        // TODO Auto-generated method stub
         return datas[position/5][position%5];
     }
 
     @Override
     public long getItemId(int position) {
-        // TODO Auto-generated method stub
         return position;
     }
 
     @Override
     public int getViewTypeCount() {
-        // TODO 返回数据类型的个数
         return 2;
     }
 

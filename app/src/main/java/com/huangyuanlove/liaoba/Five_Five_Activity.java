@@ -3,6 +3,7 @@ package com.huangyuanlove.liaoba;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -15,22 +16,29 @@ public class Five_Five_Activity extends AppCompatActivity {
     private GridView gridView;
     private Five_Five_Adapter adapter;
     private int flag = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_five__five);
 
+        getSupportActionBar().setTitle("游戏");
+        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+
         AlertDialog alertDialog = new AlertDialog.Builder(this)
                 .setCancelable(true)
                 .setTitle("提示")
                 .setMessage("点击小方块会改变它和它上下左右的颜色，将所有小方块的颜色变成其他颜色，you win")
-                .setPositiveButton("确定",null)
+                .setPositiveButton("确定", null)
                 .create();
         alertDialog.show();
 
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
-                datas[i][j]= 1;
+                datas[i][j] = 1;
             }
         }
         gridView = (GridView) findViewById(R.id.five_five_gridView);
@@ -41,32 +49,43 @@ public class Five_Five_Activity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position,
                                     long arg3) {
-                int i = position/5;
-                int j = position%5;
+                int i = position / 5;
+                int j = position % 5;
                 negative(i, j);
-                if(i>0)
-                    negative(i-1, j);
-                if(i<4)
-                    negative(i+1, j);
-                if(j>0)
-                    negative(i, j-1);
-                if(j<4)
-                    negative(i, j+1);
+                if (i > 0)
+                    negative(i - 1, j);
+                if (i < 4)
+                    negative(i + 1, j);
+                if (j > 0)
+                    negative(i, j - 1);
+                if (j < 4)
+                    negative(i, j + 1);
                 adapter.notifyDataSetChanged();
-                for(int[] data:datas){
-                    for(int d:data){
-                        if(d==flag){
+                for (int[] data : datas) {
+                    for (int d : data) {
+                        if (d == flag) {
                             return;
                         }
                     }
                 }
-                flag=-flag;
+                flag = -flag;
                 Toast.makeText(getApplicationContext(), "you win", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    public void negative(int i, int j){
+    public void negative(int i, int j) {
         datas[i][j] = -datas[i][j];
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId())
+        {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

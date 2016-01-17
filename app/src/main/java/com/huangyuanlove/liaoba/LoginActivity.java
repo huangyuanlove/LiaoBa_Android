@@ -4,12 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.CheckBox;
@@ -68,11 +66,9 @@ public class LoginActivity extends BaseActivity  {
 
         RippleView loginButton = (RippleView) findViewById(R.id.login_button);
         RippleView registerButton = (RippleView) findViewById(R.id.register_button);
-        RippleView otherButton = (RippleView) findViewById(R.id.other_button);
 
         loginButton.setRippleColor(Color.rgb(121, 121, 121), 1.0f);
         registerButton.setRippleColor(Color.rgb(121, 121, 121), 1.0f);
-        otherButton.setRippleColor(Color.rgb(121, 121, 121), 1.0f);
 
 
         loginButton.setOnClickListener(new View.OnClickListener() {

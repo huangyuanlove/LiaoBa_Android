@@ -37,7 +37,7 @@
                 android:layout_marginLeft="24dp"
                 android:layout_marginRight="24dp"
                 android:gravity="center"
-                android:hint="用户名" />
+                android:hint="邮箱\\手机号码" />
 
         </com.huangyuanlove.liaoba.customui.wrapp.floatlabelededittext.FloatLabeledEditText>
         <com.huangyuanlove.liaoba.customui.wrapp.floatlabelededittext.FloatLabeledEditText
@@ -103,7 +103,7 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <com.huangyuanlove.liaoba.customui.indris.material.RippleView
+<!--        <com.huangyuanlove.liaoba.customui.indris.material.RippleView
             android:id="@+id/other_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -111,7 +111,7 @@
             android:background="@drawable/rippleview_background"
             android:padding="12dp"
             android:text="忘记密码"
-            android:textSize="24sp" />
+            android:textSize="24sp" />-->
     </LinearLayout>
 
 </RelativeLayout>

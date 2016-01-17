@@ -75,7 +75,7 @@
             android:padding="6dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="这是软件介绍"
+            android:text="@string/apk_desc"
             android:textSize="14dp"
 
             />

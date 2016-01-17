@@ -46,7 +46,6 @@ public class PlayerService extends Service {
                 mPlayer.setDataSource(intent.getStringExtra(Config.EXSTRA_PATH));
                 mPlayer.prepare();
             } catch (Exception e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }

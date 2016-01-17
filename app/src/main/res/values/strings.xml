@@ -60,4 +60,8 @@
     <string name="pref_ringtone_silent">Silent</string>
 
     <string name="pref_title_vibrate">Vibrate</string>
+    <string name="apk_desc">
+        聊吧，陪你度过无聊的时间~\n你可以和智能机器人聊天。\n你可以查询天气、车票、机票、快递。\n你可以在聊天过程中解锁隐藏功能（在聊天内容中包含指定的关键字）。\n你可以对聊天记录进行重新排序，是聊天结果更有趣。\n你可以将对话有趣的对话内容发送到我的邮箱。\n你可以上传你的游戏记录。\n你可以～～～～～\n更多精彩内容等你发现，可以将你的发现发送的我的邮箱。
+
+    </string>
 </resources>
