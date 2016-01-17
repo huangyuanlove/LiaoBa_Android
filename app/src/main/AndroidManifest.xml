@@ -64,9 +64,8 @@
             android:exported="true" />
 
         <activity android:name=".SettingActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+            />
         <activity android:name=".ModifyPasswordActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             />
     </application>
 

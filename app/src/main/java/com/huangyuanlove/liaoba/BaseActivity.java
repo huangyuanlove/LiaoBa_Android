@@ -2,6 +2,7 @@ package com.huangyuanlove.liaoba;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import com.huangyuanlove.liaoba.utils.ActivityCollector;
 

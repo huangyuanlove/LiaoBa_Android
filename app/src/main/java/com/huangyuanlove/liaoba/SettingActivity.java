@@ -3,6 +3,8 @@ package com.huangyuanlove.liaoba;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.PopupWindow;
@@ -37,6 +39,11 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         suggest.setOnClickListener(this);
         aboutMe = (RelativeLayout) findViewById(R.id.set_about_me);
         aboutMe.setOnClickListener(this);
+
+        getSupportActionBar().setTitle("设置");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
+
     }
 
     @Override
@@ -51,5 +58,17 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
                 break;
 
         }
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId())
+        {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

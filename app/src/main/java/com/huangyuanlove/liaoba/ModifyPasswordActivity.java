@@ -1,9 +1,12 @@
 package com.huangyuanlove.liaoba;
 
 import android.graphics.Color;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
@@ -25,14 +28,14 @@ public class ModifyPasswordActivity extends AppCompatActivity implements View.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modify_password);
+        getSupportActionBar().hide();
         initView();
     }
 
     private void initView() {
-//        getActionBar().hide();
-//        getActionBar().setTitle("修改密码");
-//        getActionBar().setDisplayHomeAsUpEnabled(true);
-//        getActionBar().setDisplayShowHomeEnabled(true);
+
+
+
         shake = AnimationUtils.loadAnimation(ModifyPasswordActivity.this, R.anim.shake);
         TitanicTextView titanicTextView = (TitanicTextView) findViewById(R.id.modify_password_titanic_textView);
         Titanic titanic = new Titanic();
