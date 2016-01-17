@@ -1,135 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-        >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <com.huangyuanlove.liaoba.customui.titanic.TitanicTextView
-            android:id="@+id/login_titanic_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="聊吧"
-            android:textColor="#eeac00"
-            android:textSize="88dp"
-            android:layout_centerHorizontal="true"
-            android:layout_above="@+id/center"
-            />
+        android:id="@+id/login_titanic_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/center"
+        android:layout_centerHorizontal="true"
+        android:text="聊吧"
+        android:textColor="#eeac00"
+        android:textSize="88dp" />
 
     <LinearLayout
-            android:id="@+id/center"
+        android:id="@+id/center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="72sp"
+        android:layout_marginRight="72sp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.huangyuanlove.liaoba.customui.wrapp.floatlabelededittext.FloatLabeledEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:layout_marginRight="72sp"
-            android:layout_marginLeft="72sp"
-            >
-
-
-        <com.huangyuanlove.liaoba.customui.wrapp.floatlabelededittext.FloatLabeledEditText
-                android:layout_marginLeft="24sp"
-                android:layout_marginRight="24sp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
+            android:layout_marginLeft="24sp"
+            android:layout_marginRight="24sp">
 
             <EditText
-                    android:id="@+id/username"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="24dp"
-                    android:layout_marginRight="24dp"
-                    android:hint="用户名"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    />
-
-        </com.huangyuanlove.liaoba.customui.wrapp.floatlabelededittext.FloatLabeledEditText>
-
-
-        <com.huangyuanlove.liaoba.customui.wrapp.floatlabelededittext.FloatLabeledEditText
-                android:layout_marginLeft="24sp"
-                android:layout_marginRight="24sp"
+                android:id="@+id/username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                >
-
-            <EditText
-                    android:id="@+id/password"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="24dp"
-                    android:layout_marginRight="24dp"
-                    android:hint="密码"
-                    android:password="true"
-                    android:layout_gravity="center_horizontal"
-                    android:gravity="center"
-                    android:singleLine="true"
-
-                    />
+                android:layout_gravity="center"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                android:gravity="center"
+                android:hint="用户名" />
 
         </com.huangyuanlove.liaoba.customui.wrapp.floatlabelededittext.FloatLabeledEditText>
-
-
-
+        <com.huangyuanlove.liaoba.customui.wrapp.floatlabelededittext.FloatLabeledEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24sp"
+            android:layout_marginRight="24sp">
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                android:gravity="center"
+                android:hint="密码"
+                android:password="true"
+                android:singleLine="true"
+                />
+        </com.huangyuanlove.liaoba.customui.wrapp.floatlabelededittext.FloatLabeledEditText>
         <LinearLayout
-                android:layout_marginTop="16dp"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <com.huangyuanlove.liaoba.customui.indris.material.RippleView
+                android:id="@+id/register_button"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                >
+                android:layout_marginRight="24dp"
+                android:background="@drawable/rippleview_background"
+                android:padding="12dp"
+                android:text="注册"
+                android:textSize="24sp" />
+
             <com.huangyuanlove.liaoba.customui.indris.material.RippleView
-                    android:id="@+id/register_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="12dp"
-                    android:textSize="24sp"
-                    android:background="@drawable/rippleview_background"
-                    android:text="注册"
-                    android:layout_marginRight="24dp"
-                    />
-            <com.huangyuanlove.liaoba.customui.indris.material.RippleView
-                    android:id="@+id/login_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="12dp"
-                    android:textSize="24sp"
-                    android:background="@drawable/rippleview_background"
-                    android:text="登录"
-                    android:layout_marginLeft="24sp"
-                    />
+                android:id="@+id/login_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24sp"
+                android:background="@drawable/rippleview_background"
+                android:padding="12dp"
+                android:text="登录"
+                android:textSize="24sp" />
         </LinearLayout>
 
         <CheckBox
-                android:id="@+id/saveStatus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="记住登录状态"
-                />
+            android:id="@+id/saveStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="记住登录状态" />
 
     </LinearLayout>
 
 
     <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/center"
-            android:layout_marginTop="24dp"
-            android:gravity="center"
-            >
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/center"
+        android:layout_marginTop="24dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
         <com.huangyuanlove.liaoba.customui.indris.material.RippleView
-                android:id="@+id/other_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="12dp"
-                android:textSize="24sp"
-                android:text="第三方登录"
-                android:layout_marginRight="24dp"
-                android:background="@drawable/rippleview_background"
-                />
+            android:id="@+id/other_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:background="@drawable/rippleview_background"
+            android:padding="12dp"
+            android:text="忘记密码"
+            android:textSize="24sp" />
     </LinearLayout>
 
 </RelativeLayout>

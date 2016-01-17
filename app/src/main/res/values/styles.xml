@@ -7,5 +7,43 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    <!-- 设置中心布局样式 -->
+    <style name="setting_relativelayoutstyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">66dp</item>
+        <item name="android:paddingLeft">10dp</item>
+    </style>
+    <!-- 设置中心item布局样式 -->
+    <style name="setting_imagestyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_alignParentLeft">true</item>
+    </style>
+    <!-- 设置中心item布局样式 -->
+    <style name="setting_textviewstyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+    <!-- 设置中心item布局样式 -->
+    <style name="setting_dividelinestyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1px</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_alignParentBottom">true</item>
+    </style>
 
+
+    <style name="setting_arrowguide">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginRight">12dp</item>
+        <item name="android:src">@drawable/arrow_right</item>
+        <item name="android:layout_alignParentRight">true</item>
+    </style>
 </resources>

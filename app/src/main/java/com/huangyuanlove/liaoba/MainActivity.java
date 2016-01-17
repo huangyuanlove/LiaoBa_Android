@@ -17,7 +17,6 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.huangyuanlove.liaoba.customui.indris.material.RippleView;
@@ -138,13 +137,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .create()
                         .show();
                 break;
-            case Config.MENU_ABOUT_ME:
 
-                Toast.makeText(this, "huangyuan_xuan", Toast.LENGTH_SHORT).show();
-
-                break;
             case Config.MENU_SETTING:
-                Toast.makeText(this, "暂无权限进行设置", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity.this,SettingActivity.class));
                 break;
         }
     }
@@ -221,11 +216,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mResideMenu.attachToActivity(this);
 
         // create menu items;
-        String titles[] = {"注销", "隐藏属性", "软件设置", "关于作者"};
+        String titles[] = {"注销", "隐藏属性", "软件设置"};
         int icon[] = {R.drawable.logout,
                 R.drawable.hide_function,
                 R.drawable.setting,
-                R.drawable.about_me};
+                };
 
         for (int i = 0; i < titles.length; i++) {
             ResideMenuItem item = new ResideMenuItem(this, icon[i], titles[i]);

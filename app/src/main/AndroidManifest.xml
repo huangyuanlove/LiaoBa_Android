@@ -32,36 +32,27 @@
             android:theme="@style/Theme.AppCompat.Dialog">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".ResponseURLView" >
-        </activity>
-
-        <activity android:name=".MainActivity" >
-        </activity>
-
+        <activity android:name=".ResponseURLView" />
+        <activity android:name=".MainActivity" />
         <activity
             android:name=".LoginActivity"
             android:launchMode="singleTask" />
         <activity android:name=".RegisterActivity" />
-
         <activity android:name=".Five_Five_Activity">
             <intent-filter>
                 <action android:name="game" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".BaiduMapActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
-        </activity>
-
-        <activity android:name=".PlayMusicActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            >
-        </activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".PlayMusicActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
 
         <service
             android:name="com.baidu.location.f"
@@ -71,6 +62,12 @@
             android:name=".service.PlayerService"
             android:enabled="true"
             android:exported="true" />
+
+        <activity android:name=".SettingActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity android:name=".ModifyPasswordActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            />
     </application>
 
 </manifest>
