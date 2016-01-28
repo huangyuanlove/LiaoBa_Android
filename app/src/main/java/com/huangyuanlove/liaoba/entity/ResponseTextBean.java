@@ -5,13 +5,13 @@ package com.huangyuanlove.liaoba.entity;
  * Author: huangyuan_xuan
  * Date: 2015/10/17
  */
-public class ResponseText {
+public class ResponseTextBean {
 
 
     private int code;
     private String text;
 
-    public ResponseText() {
+    public ResponseTextBean() {
     }
 
     public void setCode(int code) {

@@ -1,8 +1,9 @@
 package com.huangyuanlove.liaoba;
 
+import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,10 +13,14 @@ import android.widget.Toast;
 import com.huangyuanlove.liaoba.adapter.Five_Five_Adapter;
 
 public class Five_Five_Activity extends AppCompatActivity {
+
+
+    private final String TAG = "Five_Five_Activity";
     private int[][] datas = new int[5][5];
     private GridView gridView;
     private Five_Five_Adapter adapter;
     private int flag = 1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +31,8 @@ public class Five_Five_Activity extends AppCompatActivity {
         getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+
 
 
         AlertDialog alertDialog = new AlertDialog.Builder(this)
@@ -44,6 +51,7 @@ public class Five_Five_Activity extends AppCompatActivity {
         gridView = (GridView) findViewById(R.id.five_five_gridView);
         adapter = new Five_Five_Adapter(this, datas);
         gridView.setAdapter(adapter);
+
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -87,5 +95,10 @@ public class Five_Five_Activity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

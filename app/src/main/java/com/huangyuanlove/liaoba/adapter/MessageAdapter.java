@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.huangyuanlove.liaoba.R;
-import com.huangyuanlove.liaoba.entity.Message;
+import com.huangyuanlove.liaoba.entity.MessageBean;
 
 import java.util.List;
 
@@ -23,8 +23,8 @@ public class MessageAdapter extends BaseAdapter  {
 
     private int resourceID;
     private Context context;
-    private List<Message> datas;
-    public MessageAdapter(Context context, int resource, List<Message> objects) {
+    private List<MessageBean> datas;
+    public MessageAdapter(Context context, int resource, List<MessageBean> objects) {
 //        super(context, resource, objects);
 
         this.resourceID = resource;
@@ -52,7 +52,7 @@ public class MessageAdapter extends BaseAdapter  {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view;
-        Message msg = datas.get(position);
+        MessageBean msg = datas.get(position);
 
         ViewHolder viewHolder;
         if (convertView == null) {
@@ -71,12 +71,12 @@ public class MessageAdapter extends BaseAdapter  {
             viewHolder = (ViewHolder) view.getTag();
         }
 
-        if (msg.getType() == Message.MSG_TYPE_RECEIVED) {
+        if (msg.getType() == MessageBean.MSG_TYPE_RECEIVED) {
             viewHolder.leftLayout.setVisibility(View.VISIBLE);
             viewHolder.rightLayout.setVisibility(View.GONE);
             viewHolder.leftMessage.setText(msg.getContent());
 
-        } else if (msg.getType() == Message.MSG_TYPE_SENT) {
+        } else if (msg.getType() == MessageBean.MSG_TYPE_SENT) {
             viewHolder.leftLayout.setVisibility(View.GONE);
             viewHolder.rightLayout.setVisibility(View.VISIBLE);
             viewHolder.rightMessage.setText(msg.getContent());

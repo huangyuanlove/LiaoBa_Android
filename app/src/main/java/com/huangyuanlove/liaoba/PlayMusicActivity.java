@@ -1,7 +1,5 @@
 package com.huangyuanlove.liaoba;
 
-import java.text.SimpleDateFormat;
-
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -15,7 +13,6 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -26,8 +23,14 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
+import com.huangyuanlove.liaoba.entity.MusicBean;
 import com.huangyuanlove.liaoba.service.PlayerService;
 import com.huangyuanlove.liaoba.utils.Config;
+import com.huangyuanlove.liaoba.utils.PinYin;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PlayMusicActivity extends AppCompatActivity {
 
@@ -39,6 +42,9 @@ public class PlayMusicActivity extends AppCompatActivity {
     MyReceiver myReceiver;
     LocalBroadcastManager localBroadcastManager;
     TextView timeTextView;
+    List<MusicBean> datas = new ArrayList<>();
+
+    PinYin pinYin = new PinYin();
 
     SimpleDateFormat sdf = new SimpleDateFormat("mm:ss");
 
@@ -86,7 +92,6 @@ public class PlayMusicActivity extends AppCompatActivity {
 
             @Override
             public void onLoaderReset(Loader<Cursor> loader) {
-                // TODO Auto-generated method stub
 
             }
         });
@@ -96,7 +101,6 @@ public class PlayMusicActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                // TODO Auto-generated method stub
                 Cursor cursor = adapter.getCursor();
                 cursor.moveToPosition(position);
                 String path = cursor.getString(3);
@@ -133,6 +137,18 @@ public class PlayMusicActivity extends AppCompatActivity {
                 }
             }
         };
+
+        Cursor cursor = adapter.getCursor();
+        while(cursor.moveToNext())
+        {
+            MusicBean musicBean = new MusicBean();
+            musicBean.setMusicName(cursor.getString(1));
+            musicBean.setMusicTime(cursor.getString(2));
+            musicBean.setMusicPath(cursor.getString(3));
+            musicBean.setSortKey(pinYin.String2Alpha(cursor.getString(1)));
+            datas.add(musicBean);
+        }
+
 
         listView.setAdapter(adapter);
 

@@ -7,7 +7,7 @@ import java.util.List;
  * Author: huangyuan_xuan
  * Date: 2015/10/17
  */
-public class ResponseNews {
+public class ResponseNewsBean {
 
 
 
@@ -16,7 +16,7 @@ public class ResponseNews {
     private String text;
     private List<ListEntity> list;
 
-    public ResponseNews() {
+    public ResponseNewsBean() {
     }
 
     public void setCode(int code) {

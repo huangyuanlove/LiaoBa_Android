@@ -25,9 +25,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.huangyuanlove.liaoba.adapter.MessageAdapter;
-import com.huangyuanlove.liaoba.entity.Message;
-import com.huangyuanlove.liaoba.entity.ResponseLink;
-import com.huangyuanlove.liaoba.entity.ResponseTrain;
+import com.huangyuanlove.liaoba.entity.MessageBean;
+import com.huangyuanlove.liaoba.entity.ResponseLinkBean;
+import com.huangyuanlove.liaoba.entity.ResponseTrainBean;
 import com.huangyuanlove.liaoba.utils.Config;
 import com.huangyuanlove.liaoba.utils.GsonTool;
 import com.mobeta.android.dslv.DragSortListView;
@@ -51,7 +51,7 @@ public class ChatFragment extends Fragment {
     private DragSortListView messageListView;
     private EditText inputText;
     private MessageAdapter messageAdapter;
-    private List<Message> messageList = new ArrayList<>();
+    private List<MessageBean> messageList = new ArrayList<>();
     private RequestQueue requestQueue;
     private int currentResponseCode;
     private Button sendMsg;
@@ -90,7 +90,7 @@ public class ChatFragment extends Fragment {
         messageListView.setDropListener(new DragSortListView.DropListener() {
             @Override
             public void drop(int i, int i1) {
-                Message temp = messageList.get(i);
+                MessageBean temp = messageList.get(i);
                 messageList.remove(i);
                 messageList.add(i1, temp);
                 messageAdapter.notifyDataSetChanged();
@@ -108,7 +108,7 @@ public class ChatFragment extends Fragment {
         messageListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                final Message message = (Message) parent.getItemAtPosition(position);
+                final MessageBean message = (MessageBean) parent.getItemAtPosition(position);
                 pm = new PopupMenu(getActivity(),view);
                 menu = pm.getMenu();
                 getActivity().getMenuInflater().inflate(R.menu.msg_popup_menu,menu);
@@ -171,13 +171,13 @@ public class ChatFragment extends Fragment {
                                         if (currentResponseCode == 0)
                                             response = "不能理解你说的话";
                                         else if (currentResponseCode == 200000) {
-                                            ResponseLink responseLink = GsonTool.getObj(response, ResponseLink.class);
+                                            ResponseLinkBean responseLink = GsonTool.getObj(response, ResponseLinkBean.class);
                                             response = responseLink.getText() + "\n已经帮您自动打开，网址如下：\n" + responseLink.getUrl();
                                             ResponseURLView.actionStart(getActivity(), responseLink.getUrl());
                                         } else if (currentResponseCode == 305000) {
-                                            ResponseTrain responseTrain = GsonTool.getObj(response, ResponseTrain.class);
-                                            List<ResponseTrain.ListEntity> trainList = responseTrain.getList();
-                                            for (ResponseTrain.ListEntity train : trainList) {
+                                            ResponseTrainBean responseTrain = GsonTool.getObj(response, ResponseTrainBean.class);
+                                            List<ResponseTrainBean.ListEntity> trainList = responseTrain.getList();
+                                            for (ResponseTrainBean.ListEntity train : trainList) {
                                                 response += train.getTrainnum() + "\n"
                                                         + train.getStart() + "----->" + train.getTerminal() + "\n"
                                                         + train.getStarttime() + "----->" + train.getEndtime() + "\n\n";
@@ -188,7 +188,7 @@ public class ChatFragment extends Fragment {
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
-                                    Message message = new Message(response, Message.MSG_TYPE_RECEIVED);
+                                    MessageBean message = new MessageBean(response, MessageBean.MSG_TYPE_RECEIVED);
                                     messageList.add(message);
                                     messageAdapter.notifyDataSetChanged();
                                     messageListView.setSelection(messageList.size());
@@ -201,7 +201,7 @@ public class ChatFragment extends Fragment {
                                 }
                             });
                     requestQueue.add(stringRequest);
-                    Message message = new Message(content, Message.MSG_TYPE_SENT);
+                    MessageBean message = new MessageBean(content, MessageBean.MSG_TYPE_SENT);
                     messageList.add(message);
                     messageAdapter.notifyDataSetChanged();
                     messageListView.setSelection(messageList.size());

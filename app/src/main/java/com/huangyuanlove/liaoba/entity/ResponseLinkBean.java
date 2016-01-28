@@ -5,14 +5,14 @@ package com.huangyuanlove.liaoba.entity;
  * Author: huangyuan_xuan
  * Date: 2015/10/17
  */
-public class ResponseLink {
+public class ResponseLinkBean {
 
 
     private int code;
     private String text;
     private String url;
 
-    public ResponseLink() {
+    public ResponseLinkBean() {
     }
 
     public void setCode(int code) {
