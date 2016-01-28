@@ -35,4 +35,8 @@ public class Config {
     public static final int RESPONSE_TYPE_TRAIN = 305000;
     //菜谱
     public static final int RESPONSE_TYPE_COOKBOOK = 308000;
+
+    public static final String LOGIN_URL = "http://192.168.99.108:8080/LiaoBa/login.do";
+
+
 }

@@ -7,7 +7,7 @@ import java.util.List;
  * Author: huangyuan_xuan
  * Date: 2015/10/17
  */
-public class ResponseCookbook {
+public class ResponseCookbookBean {
 
 
 
