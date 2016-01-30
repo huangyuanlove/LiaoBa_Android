@@ -6,6 +6,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -63,8 +64,8 @@ public class BaiduMapActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         SDKInitializer.initialize(getApplicationContext());
         setContentView(R.layout.activity_baidu_map);
+        overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
         baiduMapView = (MapView) findViewById(R.id.bmapView);
-
         location_button = (RippleView) findViewById(R.id.location);
         mLocationClient = new LocationClient(getApplicationContext());     //声明LocationClient类
         mLocationClient.registerLocationListener(myListener);    //注册监听函数
@@ -321,5 +322,4 @@ public class BaiduMapActivity extends AppCompatActivity {
                 .city(cityName)
                 .to(enNode));
     }
-
 }

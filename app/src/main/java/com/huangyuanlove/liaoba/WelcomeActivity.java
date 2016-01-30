@@ -45,6 +45,7 @@ public class WelcomeActivity extends Activity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.welcome_activity);
+        overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
         sharePrefrenceUtils = SharePrefrenceUtils.getInstance(WelcomeActivity.this);
         secretTextView = (SecretTextView) findViewById(R.id.secretTextView);
         TitanicTextView titanicTextView = (TitanicTextView) findViewById(R.id.titanic_textView);
@@ -127,6 +128,7 @@ public class WelcomeActivity extends Activity {
                     intent.setClass(WelcomeActivity.this, LoginActivity.class);
                     startActivity(intent);
                 }
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 WelcomeActivity.this.finish();
             }
         }

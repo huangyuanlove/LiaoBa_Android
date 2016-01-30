@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
 
         initMenuFragment();
         initResideMenu();

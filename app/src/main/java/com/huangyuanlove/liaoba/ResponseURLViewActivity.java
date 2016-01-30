@@ -14,7 +14,7 @@ import android.webkit.WebViewClient;
  * Author: huangyuan_xuan
  * Date: 2015/10/17
  */
-public class ResponseURLView extends BaseActivity {
+public class ResponseURLViewActivity extends BaseActivity {
 
 
     private WebView webView;
@@ -25,6 +25,7 @@ public class ResponseURLView extends BaseActivity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.response_url_view);
+        overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
 
         String url = getIntent().getStringExtra("url");
 
@@ -49,7 +50,7 @@ public class ResponseURLView extends BaseActivity {
     }
 
     public static void actionStart(Context context, String url) {
-        Intent intent = new Intent(context, ResponseURLView.class);
+        Intent intent = new Intent(context, ResponseURLViewActivity.class);
         intent.putExtra("url", url);
         context.startActivity(intent);
     }

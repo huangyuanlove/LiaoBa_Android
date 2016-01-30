@@ -173,7 +173,7 @@ public class ChatFragment extends Fragment {
                                         else if (currentResponseCode == 200000) {
                                             ResponseLinkBean responseLink = GsonTool.getObj(response, ResponseLinkBean.class);
                                             response = responseLink.getText() + "\n已经帮您自动打开，网址如下：\n" + responseLink.getUrl();
-                                            ResponseURLView.actionStart(getActivity(), responseLink.getUrl());
+                                            ResponseURLViewActivity.actionStart(getActivity(), responseLink.getUrl());
                                         } else if (currentResponseCode == 305000) {
                                             ResponseTrainBean responseTrain = GsonTool.getObj(response, ResponseTrainBean.class);
                                             List<ResponseTrainBean.ListEntity> trainList = responseTrain.getList();

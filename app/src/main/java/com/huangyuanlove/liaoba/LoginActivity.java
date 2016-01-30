@@ -49,6 +49,8 @@ public class LoginActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.login_activity);
+        overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+
         sharePrefrenceUtils = SharePrefrenceUtils.getInstance(LoginActivity.this);
         requestQueue = ((MyApplication) getApplication()).getRequestQueue();
         initRippleViewButton();
@@ -93,7 +95,6 @@ public class LoginActivity extends BaseActivity {
                     return;
                 }
                 if (saveStatus.isChecked()) {
-                    sharePrefrenceUtils.setString("username", username_editText.getText().toString());
                     sharePrefrenceUtils.setBoolean("isSaveStatus", true);
                 } else {
                     sharePrefrenceUtils.setBoolean("isSaveStatus", false);
@@ -105,17 +106,18 @@ public class LoginActivity extends BaseActivity {
                         if (response != null && !"".equals(response.trim())) {
 
                             UserBean user = gson.fromJson(response, UserBean.class);
-                            sharePrefrenceUtils.setString("userid", user.getUserid());
-                            sharePrefrenceUtils.setString("record", user.getRecord());
-                            sharePrefrenceUtils.setString("uuid", user.getUUID());
-                            if(saveStatus.isChecked())
-                            {
-                                sharePrefrenceUtils.setString("password",user.getPassword());
+                            if (user != null) {
+                                sharePrefrenceUtils.setString("userid", user.getUserid());
+                                sharePrefrenceUtils.setString("record", user.getRecord());
+                                sharePrefrenceUtils.setString("uuid", user.getUUID());
+                                if (saveStatus.isChecked()) {
+                                    sharePrefrenceUtils.setString("password", user.getPassword());
+                                }
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                startActivity(intent);
+                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                                LoginActivity.this.finish();
                             }
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            startActivity(intent);
-                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                            LoginActivity.this.finish();
                         } else {
                             Toast.makeText(LoginActivity.this, "用户名或密码错误", Toast.LENGTH_SHORT).show();
                         }
@@ -149,7 +151,6 @@ public class LoginActivity extends BaseActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
-                overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
             }
         });
 

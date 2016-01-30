@@ -27,6 +27,8 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_me);
+        overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+
         initView();
     }
 

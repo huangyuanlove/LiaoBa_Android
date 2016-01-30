@@ -36,7 +36,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ResponseURLView" />
+        <activity android:name=".ResponseURLViewActivity" />
         <activity android:name=".MainActivity" />
         <activity
             android:name=".LoginActivity"

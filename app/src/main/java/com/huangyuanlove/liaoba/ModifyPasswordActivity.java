@@ -1,9 +1,11 @@
 package com.huangyuanlove.liaoba;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -12,9 +14,22 @@ import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.google.gson.Gson;
 import com.huangyuanlove.liaoba.customui.indris.material.RippleView;
 import com.huangyuanlove.liaoba.customui.titanic.Titanic;
 import com.huangyuanlove.liaoba.customui.titanic.TitanicTextView;
+import com.huangyuanlove.liaoba.entity.UserBean;
+import com.huangyuanlove.liaoba.utils.Config;
+import com.huangyuanlove.liaoba.utils.SharePrefrenceUtils;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class ModifyPasswordActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -24,18 +39,21 @@ public class ModifyPasswordActivity extends AppCompatActivity implements View.On
     private EditText newPaddword;
     private EditText confirmPassword;
     private Animation shake;
+    private RequestQueue requestQueue;
+    private SharePrefrenceUtils sharePrefrenceUtils;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modify_password);
         getSupportActionBar().hide();
+        overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+
+        requestQueue = ((MyApplication)getApplication()).getRequestQueue();
+        sharePrefrenceUtils = SharePrefrenceUtils.getInstance(this);
         initView();
     }
 
     private void initView() {
-
-
-
         shake = AnimationUtils.loadAnimation(ModifyPasswordActivity.this, R.anim.shake);
         TitanicTextView titanicTextView = (TitanicTextView) findViewById(R.id.modify_password_titanic_textView);
         Titanic titanic = new Titanic();
@@ -84,6 +102,58 @@ public class ModifyPasswordActivity extends AppCompatActivity implements View.On
                     Toast.makeText(this,"密码不一致",Toast.LENGTH_SHORT).show();
                     return ;
                 }
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST
+                , Config.MODIFYPASSWORD_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Gson gson = new Gson();
+                        if(response != null && !"".equals(response.trim()))
+                        {
+                            UserBean user = gson.fromJson(response, UserBean.class);
+                            if (user != null) {
+                                sharePrefrenceUtils.setString("userid", user.getUserid());
+                                sharePrefrenceUtils.setString("record", user.getRecord());
+                                sharePrefrenceUtils.setString("uuid", user.getUUID());
+                                if (sharePrefrenceUtils.getBoolean("isSaveStatus", false)) {
+                                    sharePrefrenceUtils.setString("password", user.getPassword());
+                                }
+                                Intent intent = new Intent(ModifyPasswordActivity.this, LoginActivity.class);
+                                startActivity(intent);
+                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                                ModifyPasswordActivity.this.finish();
+                            }
+                        }
+                        else
+                        {
+                            oldPassword.startAnimation(shake);
+                            Toast.makeText(ModifyPasswordActivity.this, "密码不正确！", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(ModifyPasswordActivity.this,"网络错误",Toast.LENGTH_SHORT).show();
+                    }
+                }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                String userid = sharePrefrenceUtils.getString("userid");
+                String uuid=sharePrefrenceUtils.getString("uuid");
+                String record=sharePrefrenceUtils.getString("record");
+                Map<String,String> map = new HashMap<>();
+                map.put("userID",userid);
+                map.put("oldPassword",oldPassword.getText().toString().trim());
+                map.put("newPassword",newPaddword.getText().toString().trim());
+                map.put("uuid",uuid);
+                map.put("record",record);
+                return  map;
+            }
+        };
+
+                requestQueue.add(stringRequest);
                 break;
             case R.id.modify_password_resetbutton:
                 oldPassword.setText("");
@@ -92,4 +162,6 @@ public class ModifyPasswordActivity extends AppCompatActivity implements View.On
                 break;
         }
     }
+
+
 }

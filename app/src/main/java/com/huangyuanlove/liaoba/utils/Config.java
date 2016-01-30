@@ -36,7 +36,12 @@ public class Config {
     //菜谱
     public static final int RESPONSE_TYPE_COOKBOOK = 308000;
 
+    //登录接口
     public static final String LOGIN_URL = "http://192.168.99.108:8080/LiaoBa/login.do";
 
+    //注册接口
+    public static final String REGISTER_URL = "http://192.168.99.108:8080/LiaoBa/regiser.do";
 
+    //修改密码接口
+    public static final String MODIFYPASSWORD_URL = "http://192.168.99.108:8080/LiaoBa/modifypassword.do";
 }

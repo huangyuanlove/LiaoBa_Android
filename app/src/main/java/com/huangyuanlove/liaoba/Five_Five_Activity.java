@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -26,6 +27,7 @@ public class Five_Five_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_five__five);
+        overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
 
         getSupportActionBar().setTitle("游戏");
         getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
