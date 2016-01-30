@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.Response.ErrorListener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
@@ -109,7 +110,7 @@ public class LoginActivity extends BaseActivity {
                             if (user != null) {
                                 sharePrefrenceUtils.setString("userid", user.getUserid());
                                 sharePrefrenceUtils.setString("record", user.getRecord());
-                                sharePrefrenceUtils.setString("uuid", user.getUUID());
+                                sharePrefrenceUtils.setString("uuid", user.getUuid());
                                 if (saveStatus.isChecked()) {
                                     sharePrefrenceUtils.setString("password", user.getPassword());
                                 }
@@ -122,10 +123,9 @@ public class LoginActivity extends BaseActivity {
                             Toast.makeText(LoginActivity.this, "用户名或密码错误", Toast.LENGTH_SHORT).show();
                         }
                     }
-                }, new Response.ErrorListener() {
+                }, new ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.d("LoginActivity", error.toString() + "-----------");
                         Toast.makeText(LoginActivity.this, "网络连接错误", Toast.LENGTH_SHORT).show();
 
                     }

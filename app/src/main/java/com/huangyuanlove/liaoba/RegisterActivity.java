@@ -118,7 +118,6 @@ public class RegisterActivity extends BaseActivity {
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                Log.d("RegisterActivity",error.getMessage());
                                 Toast.makeText(RegisterActivity.this,"网络错误",Toast.LENGTH_SHORT).show();
                             }
                         }

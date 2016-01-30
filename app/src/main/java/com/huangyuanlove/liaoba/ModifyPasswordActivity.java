@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -115,7 +116,7 @@ public class ModifyPasswordActivity extends AppCompatActivity implements View.On
                             if (user != null) {
                                 sharePrefrenceUtils.setString("userid", user.getUserid());
                                 sharePrefrenceUtils.setString("record", user.getRecord());
-                                sharePrefrenceUtils.setString("uuid", user.getUUID());
+                                sharePrefrenceUtils.setString("uuid", user.getUuid());
                                 if (sharePrefrenceUtils.getBoolean("isSaveStatus", false)) {
                                     sharePrefrenceUtils.setString("password", user.getPassword());
                                 }
@@ -144,7 +145,7 @@ public class ModifyPasswordActivity extends AppCompatActivity implements View.On
                 String uuid=sharePrefrenceUtils.getString("uuid");
                 String record=sharePrefrenceUtils.getString("record");
                 Map<String,String> map = new HashMap<>();
-                map.put("userID",userid);
+                map.put("userid",userid);
                 map.put("oldPassword",oldPassword.getText().toString().trim());
                 map.put("newPassword",newPaddword.getText().toString().trim());
                 map.put("uuid",uuid);

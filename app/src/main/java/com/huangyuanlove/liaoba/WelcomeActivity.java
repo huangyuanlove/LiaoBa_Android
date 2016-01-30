@@ -108,6 +108,7 @@ public class WelcomeActivity extends Activity {
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(WelcomeActivity.this,"网络错误",Toast.LENGTH_SHORT).show();
 
                         }
                     }) {

@@ -8,7 +8,7 @@ public class UserBean {
 
     private String userid;
     private String password;
-    private String UUID;
+    private String uuid;
     private String record;
 
 
@@ -28,12 +28,12 @@ public class UserBean {
         this.password = password;
     }
 
-    public String getUUID() {
-        return UUID;
+    public String getUuid() {
+        return uuid;
     }
 
-    public void setUUID(String UUID) {
-        this.UUID = UUID;
+    public void setUuid(String UUID) {
+        this.uuid = UUID;
     }
 
     public String getRecord() {
