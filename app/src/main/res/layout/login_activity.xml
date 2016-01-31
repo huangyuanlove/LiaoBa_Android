@@ -37,7 +37,7 @@
                 android:layout_marginLeft="24dp"
                 android:layout_marginRight="24dp"
                 android:gravity="center"
-                android:hint="邮箱\\手机号码" />
+                android:hint="用户名" />
 
         </com.huangyuanlove.liaoba.customui.wrapp.floatlabelededittext.FloatLabeledEditText>
         <com.huangyuanlove.liaoba.customui.wrapp.floatlabelededittext.FloatLabeledEditText

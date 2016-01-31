@@ -69,7 +69,7 @@ public class LoginActivity extends BaseActivity {
         saveStatus = (CheckBox) findViewById(R.id.saveStatus);
 
 
-        username_editText.setText(sharePrefrenceUtils.getString("username"));
+        username_editText.setText(sharePrefrenceUtils.getString("userid"));
 
         RippleView loginButton = (RippleView) findViewById(R.id.login_button);
         RippleView registerButton = (RippleView) findViewById(R.id.register_button);

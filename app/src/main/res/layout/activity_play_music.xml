@@ -53,11 +53,36 @@
             />
     </LinearLayout>
 
-    <com.huangyuanlove.liaoba.customui.ElasticListView
-        android:id="@+id/listView"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/progress_and_time" />
+        android:orientation="horizontal"
+        android:layout_below="@id/progress_and_time"
+        >
 
+    <com.huangyuanlove.liaoba.customui.ElasticListView
+        android:id="@+id/listView"
+        android:layout_weight="8"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        />
+        <com.huangyuanlove.liaoba.customui.SideBar
+            android:id="@+id/sideBar"
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/music_dialog_text"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="#00000000"
+        android:gravity="center"
+        android:textColor="#ff11aaff"
+        android:textSize="30dp"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        />
 
 </RelativeLayout>

@@ -36,6 +36,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".ResponseURLViewActivity" />
         <activity android:name=".MainActivity" />
         <activity
@@ -63,10 +64,8 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".SettingActivity"
-            />
-        <activity android:name=".ModifyPasswordActivity"
-            />
+        <activity android:name=".SettingActivity" />
+        <activity android:name=".ModifyPasswordActivity" />
     </application>
 
 </manifest>

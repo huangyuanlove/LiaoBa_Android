@@ -57,10 +57,9 @@ public class SideBar extends View {
 		 for (int i = 0; i < b.length; i++) {  
 			 paint.setColor(Color.rgb(33, 65, 98));  
 			  paint.setColor(Color.parseColor("#0066ff"));  
-//			  paint.setColor(this.getResources().getColor(R.color.b));  
-			 paint.setTypeface(Typeface.DEFAULT_BOLD);  
+			 paint.setTypeface(Typeface.DEFAULT_BOLD);
 			 paint.setAntiAlias(true);  
-			 paint.setTextSize(singleHeight-12);  
+			 paint.setTextSize(singleHeight-4);
 
 			 // x坐标等于中间-字符串宽度的一半.  
 			 float xPos = width / 2 - paint.measureText(b[i]) / 2;
