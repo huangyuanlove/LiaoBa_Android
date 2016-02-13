@@ -62,7 +62,7 @@ public class BaiduMapActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SDKInitializer.initialize(getApplicationContext());
+
         setContentView(R.layout.activity_baidu_map);
         overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
         baiduMapView = (MapView) findViewById(R.id.bmapView);

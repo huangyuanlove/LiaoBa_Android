@@ -19,6 +19,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -30,6 +31,7 @@ import com.huangyuanlove.liaoba.entity.ResponseLinkBean;
 import com.huangyuanlove.liaoba.entity.ResponseTrainBean;
 import com.huangyuanlove.liaoba.utils.Config;
 import com.huangyuanlove.liaoba.utils.GsonTool;
+import com.huangyuanlove.liaoba.utils.SharePrefrenceUtils;
 import com.mobeta.android.dslv.DragSortListView;
 
 import org.json.JSONException;
@@ -38,7 +40,9 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -57,8 +61,9 @@ public class ChatFragment extends Fragment {
     private Button sendMsg;
     private ClipboardManager clipboardManager;
     private ActionBar actionBar;
-    private SharedPreferences sharedPreferences;
-    private SharedPreferences.Editor editor;
+//    private SharedPreferences sharedPreferences;
+//    private SharedPreferences.Editor editor;
+    private SharePrefrenceUtils sharePrefrenceUtils;
     private PopupMenu pm;
     private Menu menu;
     public interface ChatFragmentCallBack {
@@ -73,7 +78,7 @@ public class ChatFragment extends Fragment {
         TextView emptyTextView = (TextView) view.findViewById(R.id.emptyTextView);
         clipboardManager = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
         actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
-
+        sharePrefrenceUtils = SharePrefrenceUtils.getInstance(getActivity());
 
         MyApplication myApplication = (MyApplication) getActivity().getApplication();
 
@@ -109,9 +114,9 @@ public class ChatFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                 final MessageBean message = (MessageBean) parent.getItemAtPosition(position);
-                pm = new PopupMenu(getActivity(),view);
+                pm = new PopupMenu(getActivity(), view);
                 menu = pm.getMenu();
-                getActivity().getMenuInflater().inflate(R.menu.msg_popup_menu,menu);
+                getActivity().getMenuInflater().inflate(R.menu.msg_popup_menu, menu);
                 pm.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
@@ -137,19 +142,17 @@ public class ChatFragment extends Fragment {
             public void onClick(View v) {
                 final String content = inputText.getText().toString().trim();
                 if (!"".equals(content)) {
-                    sharedPreferences = ((MyApplication) getActivity().getApplication()).getSharedPreferences();
-                    editor = sharedPreferences.edit();
                     if (content.contains("游戏") || content.contains("挑战")) {
-                        editor.putBoolean("game", true).apply();
+                        sharePrefrenceUtils.setBoolean("game",true);
                         Toast.makeText(getActivity(), "恭喜解锁隐藏功能，请到隐藏属性菜单查看", Toast.LENGTH_SHORT).show();
                     }
 
                     if (content.contains("地图")) {
-                        editor.putBoolean("map", true).commit();
+                        sharePrefrenceUtils.setBoolean("map", true);
                         Toast.makeText(getActivity(), "恭喜解锁隐藏功能，请到隐藏属性菜单查看", Toast.LENGTH_SHORT).show();
                     }
                     if (content.contains("音乐")) {
-                        editor.putBoolean("music", true).commit();
+                        sharePrefrenceUtils.setBoolean("music", true);
                         Toast.makeText(getActivity(), "恭喜解锁隐藏功能，请到隐藏属性菜单查看", Toast.LENGTH_SHORT).show();
                     }
 
@@ -159,6 +162,34 @@ public class ChatFragment extends Fragment {
                     } catch (UnsupportedEncodingException e) {
                         e.printStackTrace();
                     }
+
+                    StringRequest chatLogRequest = new StringRequest(Request.Method.POST,
+                            Config.CHATLOG_URL,
+                            new Response.Listener<String>() {
+                                @Override
+                                public void onResponse(String response) {
+                                    System.out.println(
+                                            response
+                                    );
+                                }
+                            },
+                            new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    System.out.println(error.toString());
+                                }
+                            }) {
+                        @Override
+                        protected Map<String, String> getParams() {
+                            Map<String,String> map = new HashMap<>();
+                            map.put("userid",sharePrefrenceUtils.getString("userid"));
+                            map.put("content",content);
+                            return map;
+
+                        }
+                    };
+
+
                     StringRequest stringRequest = new StringRequest(Request.Method.GET,
                             String.format(Config.TURING_ROBOT_BASH_URL, info),
                             new Response.Listener<String>() {
@@ -200,6 +231,7 @@ public class ChatFragment extends Fragment {
                                     Toast.makeText(getActivity(), "请求出错", Toast.LENGTH_SHORT).show();
                                 }
                             });
+                    requestQueue.add(chatLogRequest);
                     requestQueue.add(stringRequest);
                     MessageBean message = new MessageBean(content, MessageBean.MSG_TYPE_SENT);
                     messageList.add(message);

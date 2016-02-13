@@ -1,11 +1,8 @@
 package com.huangyuanlove.liaoba;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
@@ -17,13 +14,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.huangyuanlove.liaoba.customui.indris.material.RippleView;
 import com.huangyuanlove.liaoba.utils.Config;
+import com.huangyuanlove.liaoba.utils.SharePrefrenceUtils;
 import com.special.ResideMenu.ResideMenu;
 import com.special.ResideMenu.ResideMenuItem;
 import com.yalantis.contextmenu.lib.ContextMenuDialogFragment;
@@ -42,13 +38,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ContextMenuDialogFragment mMenuDialogFragment;
     private FragmentManager mFragmentManager;
     private EditText mEditText;
-
+    private SharePrefrenceUtils sharePrefrenceUtils;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
-
+        sharePrefrenceUtils = SharePrefrenceUtils.getInstance(this);
         initMenuFragment();
         initResideMenu();
         mFragmentManager = getSupportFragmentManager();
@@ -114,13 +110,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 alertDialog.show();
                 break;
             case Config.MENU_HIDE_FUNCTION:
-                SharedPreferences sharedPreferences = getApplication().getSharedPreferences("hide_function", Context.MODE_PRIVATE);
+//                SharedPreferences sharedPreferences = getApplication().getSharedPreferences("hide_function", Context.MODE_PRIVATE);
                 View hideFunctionView = LayoutInflater.from(this).inflate(R.layout.hide_function, null);
                 RippleView gameButton = (RippleView) hideFunctionView.findViewById(R.id.hide_function_game);
                 RippleView mapButton = (RippleView) hideFunctionView.findViewById(R.id.hide_function_map);
                 RippleView musicButton = (RippleView) hideFunctionView.findViewById(R.id.hide_function_music);
 
-                Map<String, ?> hideFunction = sharedPreferences.getAll();
+
+                Map<String, ?> hideFunction = sharePrefrenceUtils.getAll();
                 if (hideFunction.isEmpty()) {
                     Toast.makeText(this, "还没有开启隐藏功能", Toast.LENGTH_SHORT).show();
                     return;

@@ -109,4 +109,10 @@ public class SharePrefrenceUtils {
 		editor.putBoolean(key, val);
 		editor.commit();
 	}
+
+
+	public Map<String,?> getAll(){
+		return mPreferences.getAll();
+	}
+
 }
