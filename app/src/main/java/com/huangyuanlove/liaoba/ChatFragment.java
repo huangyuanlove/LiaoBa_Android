@@ -228,7 +228,7 @@ public class ChatFragment extends Fragment {
                             new Response.ErrorListener() {
                                 @Override
                                 public void onErrorResponse(VolleyError error) {
-                                    Toast.makeText(getActivity(), "请求出错", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(), "网络似乎有点问题～～～", Toast.LENGTH_SHORT).show();
                                 }
                             });
                     requestQueue.add(chatLogRequest);

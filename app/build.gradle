@@ -8,7 +8,7 @@ android {
         applicationId "com.huangyuanlove.liaoba"
         minSdkVersion 14
         targetSdkVersion 23
-        versionCode 314
+        versionCode 3145
         versionName "机遇"
     }
     buildTypes {
