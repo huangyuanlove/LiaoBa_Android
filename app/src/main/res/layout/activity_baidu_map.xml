@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
 android:background="#ffffffff"
-    tools:context="com.huangyuanlove.liaoba.BaiduMapActivity">
+    tools:context=".activity.BaiduMapActivity">
     <com.huangyuanlove.liaoba.customui.indris.material.RippleView
         android:layout_gravity="center"
         android:layout_centerHorizontal="true"

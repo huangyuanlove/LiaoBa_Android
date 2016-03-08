@@ -1,4 +1,4 @@
-package com.huangyuanlove.liaoba;
+package com.huangyuanlove.liaoba.activity;
 
 import android.content.res.Configuration;
 import android.os.Bundle;

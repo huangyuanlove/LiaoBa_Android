@@ -1,4 +1,4 @@
-package com.huangyuanlove.liaoba;
+package com.huangyuanlove.liaoba.activity;
 
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
@@ -21,6 +21,7 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
+import com.huangyuanlove.liaoba.R;
 import com.huangyuanlove.liaoba.adapter.MusicAdapter;
 import com.huangyuanlove.liaoba.customui.SideBar;
 import com.huangyuanlove.liaoba.entity.MusicBean;

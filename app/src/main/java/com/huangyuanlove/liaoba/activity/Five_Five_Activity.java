@@ -1,4 +1,4 @@
-package com.huangyuanlove.liaoba;
+package com.huangyuanlove.liaoba.activity;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
 
+import com.huangyuanlove.liaoba.R;
 import com.huangyuanlove.liaoba.adapter.Five_Five_Adapter;
 
 public class Five_Five_Activity extends AppCompatActivity {

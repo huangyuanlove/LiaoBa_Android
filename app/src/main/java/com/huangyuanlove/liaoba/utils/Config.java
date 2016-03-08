@@ -36,14 +36,25 @@ public class Config {
     //菜谱
     public static final int RESPONSE_TYPE_COOKBOOK = 308000;
 
-    
+    public static final String BASE_URL = "http://115.159.101.154/LiaoBa/";
 
     //登录接口
-    public static final String LOGIN_URL = "http://192.168.99.108:8080/LiaoBa/login.do";
+    public static final String LOGIN_URL = BASE_URL + "login.do";
     //注册接口
-    public static final String REGISTER_URL = "http://192.168.99.108:8080/LiaoBa/regiser.do";
+    public static final String REGISTER_URL = BASE_URL + "regiser.do";
     //修改密码接口
-    public static final String MODIFYPASSWORD_URL = "http://192.168.99.108:8080/LiaoBa/modifypassword.do";
+    public static final String MODIFYPASSWORD_URL = BASE_URL + "modifypassword.do";
     //聊天记录接口
-    public static final String CHATLOG_URL = "http://192.168.99.108:8080/LiaoBa/chatlog.do";
+    public static final String CHATLOG_URL = BASE_URL + "chatlog.do";
+    //意见反馈接口
+    public static final String SUGGEST_URL = BASE_URL + "suggest.do";
+
+    //登录接口
+    //public static final String LOGIN_URL = "http://192.168.99.108:8080/LiaoBa/login.do";
+    //注册接口
+    //public static final String REGISTER_URL = "http://192.168.99.108:8080/LiaoBa/regiser.do";
+    //修改密码接口
+    //public static final String MODIFYPASSWORD_URL = "http://192.168.99.108:8080/LiaoBa/modifypassword.do";
+    //聊天记录接口
+    //public static final String CHATLOG_URL = "http://192.168.99.108:8080/LiaoBa/chatlog.do";
 }

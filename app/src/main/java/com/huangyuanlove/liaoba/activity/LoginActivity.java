@@ -1,9 +1,8 @@
-package com.huangyuanlove.liaoba;
+package com.huangyuanlove.liaoba.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -20,6 +19,7 @@ import com.android.volley.Response.ErrorListener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
+import com.huangyuanlove.liaoba.R;
 import com.huangyuanlove.liaoba.customui.indris.material.RippleView;
 import com.huangyuanlove.liaoba.customui.titanic.Titanic;
 import com.huangyuanlove.liaoba.customui.titanic.TitanicTextView;

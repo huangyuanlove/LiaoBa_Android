@@ -1,4 +1,4 @@
-package com.huangyuanlove.liaoba;
+package com.huangyuanlove.liaoba.activity;
 
 import android.app.Application;
 import android.content.Context;

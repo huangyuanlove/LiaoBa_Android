@@ -1,4 +1,4 @@
-package com.huangyuanlove.liaoba;
+package com.huangyuanlove.liaoba.activity;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -8,6 +8,8 @@ import android.view.Window;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+
+import com.huangyuanlove.liaoba.R;
 
 /**
  * Created

@@ -1,15 +1,15 @@
-package com.huangyuanlove.liaoba;
+package com.huangyuanlove.liaoba.activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 
+import com.huangyuanlove.liaoba.R;
 import com.huangyuanlove.liaoba.customui.indris.material.RippleView;
 
 public class SettingActivity extends AppCompatActivity implements View.OnClickListener {
@@ -57,6 +57,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
                 startActivity(new Intent(this,ModifyPasswordActivity.class));
                 break;
             case R.id.set_suggest:
+                startActivity(new Intent(this,SuggestActivity.class));
                 break;
 
         }
