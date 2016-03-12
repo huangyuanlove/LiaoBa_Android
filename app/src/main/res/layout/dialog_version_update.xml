@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#ffffff"
+    >
+
+    <TextView
+        android:id="@+id/alert_dialog_title_tv"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:background="@drawable/ic_alertdialog_title_bg"
+         />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
+        android:background="#ffffff" />
+
+    <ScrollView
+        android:id="@+id/scroller_ID"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:fadingEdge="none"
+        android:scrollbars="none" >
+
+        <TextView
+            android:id="@+id/alert_dialog_message_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:singleLine="false"
+            android:textColor="#000000"
+            android:textSize="16dp"
+            android:visibility="gone" />
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0px"
+        android:focusable="true"
+        android:focusableInTouchMode="true" />
+
+    <EditText
+        android:id="@+id/alert_dialog_message_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/dialog_et_selector"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:singleLine="true"
+        android:textColor="#000000"
+        android:textSize="16dp"
+        android:visibility="gone" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_alertdialog_dividing_line"
+         />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/alert_dialog_cancel_bt"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="取消"
+            android:background="#0000"
+            android:textSize="16dp"
+            android:textColor="@drawable/dialog_btn_color"
+            />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="48dp"
+            android:background="@drawable/ic_alertdialog_dividing_line"
+            />
+
+
+        <!--
+         <style name="alertDialog_confirm_bt_style">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:text">@string/dialog_confirm</item>
+        <item name="android:background">@color/transparent</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">@drawable/dialog_btn_color</item>
+    </style>
+        -->
+        <Button
+            android:id="@+id/alert_dialog_confirm_bt"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:background="#0000"
+            android:textSize="16dp"
+            android:textColor="@drawable/dialog_btn_color"
+            android:text="下载" />
+    </LinearLayout>
+
+</LinearLayout>

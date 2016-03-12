@@ -48,7 +48,8 @@ public class Config {
     public static final String CHATLOG_URL = BASE_URL + "chatlog.do";
     //意见反馈接口
     public static final String SUGGEST_URL = BASE_URL + "suggest.do";
-
+    //检查更新接口
+    public static final String CHEKC_UPDATA_URL = BASE_URL + "updata.do";
     //登录接口
     //public static final String LOGIN_URL = "http://192.168.99.108:8080/LiaoBa/login.do";
     //注册接口

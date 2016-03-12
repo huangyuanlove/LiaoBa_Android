@@ -50,6 +50,26 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/set_update"
+        style="@style/setting_relativelayoutstyle" >
+
+        <ImageView
+            android:id="@+id/update_icon"
+            style="@style/setting_imagestyle"
+            android:src="@drawable/set_suggest" />
+
+        <TextView
+            style="@style/setting_textviewstyle"
+            android:layout_toRightOf="@+id/update_icon"
+            android:text="版本更新" />
+
+        <ImageView style="@style/setting_dividelinestyle" />
+
+        <ImageView style="@style/setting_arrowguide" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
         android:id="@+id/set_about_me"
         style="@style/setting_relativelayoutstyle" >
 

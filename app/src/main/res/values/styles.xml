@@ -46,4 +46,54 @@
         <item name="android:src">@drawable/arrow_right</item>
         <item name="android:layout_alignParentRight">true</item>
     </style>
+
+    <style name="alertDialog_background_style">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:background">#ffffff</item>
+    </style>
+    <!-- 提示框样式 -->
+    <style name="alertDialog_title_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:background">@drawable/ic_alertdialog_title_bg</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
+        <item name="android:textColor">#333333</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="alertDialog_dividing_line_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@drawable/ic_alertdialog_dividing_line</item>
+    </style>
+
+    <style name="alertDialog_cancel_bt_style">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:text">取消</item>
+        <item name="android:background">#0000</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">@drawable/dialog_btn_color</item>
+    </style>
+
+    <style name="alertDialog_space_line_style">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:background">@drawable/ic_alertdialog_dividing_line</item>
+    </style>
+    <style name="alertDialog_confirm_bt_style">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:text">确定</item>
+        <item name="android:background">#0000</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">@drawable/dialog_btn_color</item>
+    </style>
+
 </resources>
