@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="#ffffff"
+    >
+
+    <TextView
+        android:id="@+id/about_me_title"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000"
+        android:textSize="24dp"
+        android:text="计科1203--黄沅\n指导老师：李盘靖"
+        />
+    <com.huangyuanlove.liaoba.customui.indris.material.RippleView
+        android:id="@+id/my_blog"
+        android:layout_below="@id/about_me_title"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:padding="6dp"
+        android:text="博客"
+        />
+    <com.huangyuanlove.liaoba.customui.indris.material.RippleView
+        android:id="@+id/my_home"
+        android:layout_below="@id/about_me_title"
+        android:layout_marginLeft="90dp"
+        android:layout_toRightOf="@id/my_blog"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:padding="6dp"
+        android:text="网站"
+        />
+</RelativeLayout>

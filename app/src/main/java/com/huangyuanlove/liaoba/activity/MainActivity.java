@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -52,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mFragmentManager.beginTransaction()
                 .replace(R.id.chat_fragment, new ChatFragment())
                 .addToBackStack(null)
-                .commit();
+                .commitAllowingStateLoss();
     }
 
     @Override
@@ -118,11 +119,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 RippleView musicButton = (RippleView) hideFunctionView.findViewById(R.id.hide_function_music);
 
 
-                Map<String, ?> hideFunction = sharePrefrenceUtils.getAll();
-                if (hideFunction.isEmpty()) {
+
+                if (!sharePrefrenceUtils.getBoolean("hasHideFunction",false)) {
                     Toast.makeText(this, "还没有开启隐藏功能", Toast.LENGTH_SHORT).show();
-                    return;
+
+                    break;
                 } else {
+                    Map<String, ?> hideFunction = sharePrefrenceUtils.getAll();
                     if (hideFunction.containsKey("game")) {
                         initHideFunctionView(gameButton, Five_Five_Activity.class);
                     }
@@ -132,12 +135,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     if (hideFunction.containsKey("music")) {
                         initHideFunctionView(musicButton, PlayMusicActivity.class);
                     }
-
+                    if (sharePrefrenceUtils.getBoolean("hasHideFunction", false)) {
+                        new AlertDialog.Builder(this)
+                            .setView(hideFunctionView)
+                            .setCancelable(true)
+                                .create()
+                                .show();
+                    }
                 }
-                new AlertDialog.Builder(this)
-                        .setView(hideFunctionView)
-                        .create()
-                        .show();
+
                 break;
 
             case Config.MENU_SETTING:

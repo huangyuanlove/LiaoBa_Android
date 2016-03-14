@@ -140,19 +140,26 @@ public class ChatFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 final String content = inputText.getText().toString().trim();
+                Map<String, ?> hideFunction = sharePrefrenceUtils.getAll();
                 if (!"".equals(content)) {
-                    if (content.contains("游戏") || content.contains("挑战")) {
-                        sharePrefrenceUtils.setBoolean("game",true);
+                    if (!hideFunction.containsKey("game") && (content.contains("游戏"))) {
+                        sharePrefrenceUtils.setBoolean("game", true);
+                        sharePrefrenceUtils.setBoolean("hasHideFunction",true);
                         Toast.makeText(getActivity(), "恭喜解锁隐藏功能，请到隐藏属性菜单查看", Toast.LENGTH_SHORT).show();
+                        return ;
                     }
 
-                    if (content.contains("地图")) {
+                    if (!hideFunction.containsKey("map") && content.contains("地图")) {
                         sharePrefrenceUtils.setBoolean("map", true);
                         Toast.makeText(getActivity(), "恭喜解锁隐藏功能，请到隐藏属性菜单查看", Toast.LENGTH_SHORT).show();
+                        sharePrefrenceUtils.setBoolean("hasHideFunction", true);
+                        return ;
                     }
-                    if (content.contains("音乐")) {
+                    if (!hideFunction.containsKey("music") && content.contains("音乐")) {
                         sharePrefrenceUtils.setBoolean("music", true);
                         Toast.makeText(getActivity(), "恭喜解锁隐藏功能，请到隐藏属性菜单查看", Toast.LENGTH_SHORT).show();
+                        sharePrefrenceUtils.setBoolean("hasHideFunction",true);
+                        return ;
                     }
 
                     String info = content;

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -42,7 +43,6 @@ public class ModifyPasswordActivity extends AppCompatActivity implements View.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modify_password);
-        getSupportActionBar().hide();
         overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
 
         requestQueue = ((MyApplication)getApplication()).getRequestQueue();
@@ -66,6 +66,10 @@ public class ModifyPasswordActivity extends AppCompatActivity implements View.On
         oldPassword = (EditText) findViewById(R.id.old_password);
         newPaddword = (EditText) findViewById(R.id.new_password);
         confirmPassword = (EditText) findViewById(R.id.confirm_password);
+
+        getSupportActionBar().setTitle("修改密码");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -160,5 +164,14 @@ public class ModifyPasswordActivity extends AppCompatActivity implements View.On
         }
     }
 
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId())
+        {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

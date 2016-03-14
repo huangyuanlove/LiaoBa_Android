@@ -16,7 +16,7 @@
         android:maxLength="200"
         android:background="@android:drawable/edit_text"
         android:hint="请填写你的宝贵意见，200字以内" />
-    <Button
+    <com.huangyuanlove.liaoba.customui.indris.material.RippleView
         android:id="@+id/suggest_btn"
         android:layout_alignParentBottom="true"
         android:padding="12dp"

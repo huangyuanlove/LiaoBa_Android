@@ -56,7 +56,7 @@
         <ImageView
             android:id="@+id/update_icon"
             style="@style/setting_imagestyle"
-            android:src="@drawable/set_suggest" />
+            android:src="@drawable/check_update" />
 
         <TextView
             style="@style/setting_textviewstyle"

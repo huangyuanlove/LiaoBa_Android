@@ -1,8 +1,10 @@
 package com.huangyuanlove.liaoba.activity;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +16,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.huangyuanlove.liaoba.R;
+import com.huangyuanlove.liaoba.customui.indris.material.RippleView;
 import com.huangyuanlove.liaoba.utils.Config;
 import com.huangyuanlove.liaoba.utils.SharePrefrenceUtils;
 
@@ -24,7 +27,7 @@ import java.util.Map;
 
 public class SuggestActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button submit;
+    private RippleView submit;
     private EditText suggestEdit;
     private RequestQueue requestQueue;
     private SharePrefrenceUtils sharePrefrenceUtils;
@@ -43,8 +46,12 @@ public class SuggestActivity extends AppCompatActivity implements View.OnClickLi
     {
         suggestEdit = (EditText) findViewById(R.id.suggest_edit);
         suggestEdit.setOnClickListener(this);
-        submit = (Button) findViewById(R.id.suggest_btn);
+        submit = (RippleView) findViewById(R.id.suggest_btn);
+        submit.setRippleColor(Color.rgb(121, 121, 121), 1.0f);
         submit.setOnClickListener(this);
+        getSupportActionBar().setTitle("反馈意见");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -100,5 +107,14 @@ public class SuggestActivity extends AppCompatActivity implements View.OnClickLi
         };
         requestQueue.add(stringRequest);
     }
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId())
+        {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

@@ -1,15 +1,16 @@
 package com.huangyuanlove.liaoba.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -36,6 +37,8 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
     private UpdataBean updataBean;
     private UpdateManager mUpdateManager;
     private String version ;
+    private AlertDialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,6 +110,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.set_about_me:
+                showPopupWindow();
                 break;
             case R.id.set_updata_password:
                 startActivity(new Intent(this,ModifyPasswordActivity.class));
@@ -123,10 +127,45 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
                 {
                     Toast.makeText(this,"已经是最新版本",Toast.LENGTH_SHORT).show();
                 }
-                    break;
+                break;
         }
 
     }
+
+
+    private void showPopupWindow()
+    {
+        final Intent intent = new Intent();
+
+        intent.setAction("android.intent.action.VIEW");
+
+        dialog = new AlertDialog.Builder(this)
+                .setCancelable(true)
+                .setTitle("关于作者")
+                .setMessage("计科1203--黄沅\n指导教师：李盘靖")
+                .setPositiveButton("博客", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Uri uri = Uri.parse("http://blog.csdn.net/huangyuan_xuan?viewmode=contents");
+                        intent.setData(uri);
+                        startActivity(intent);
+                        dialog.cancel();
+                    }
+                })
+                .setNegativeButton("网站", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Uri uri = Uri.parse("http://www.huangyuanlove.com");
+                        intent.setData(uri);
+                        startActivity(intent);
+                        dialog.cancel();
+                    }
+                })
+                .create();
+        dialog.show();
+
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
