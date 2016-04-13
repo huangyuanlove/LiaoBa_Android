@@ -36,7 +36,7 @@ public class Config {
     //菜谱
     public static final int RESPONSE_TYPE_COOKBOOK = 308000;
 
-    public static final String BASE_URL = "http://115.159.101.154/LiaoBa/";
+    public static final String BASE_URL = "http://www.huangyuan.pub/LiaoBa/";
 
     //登录接口
     public static final String LOGIN_URL = BASE_URL + "login.do";

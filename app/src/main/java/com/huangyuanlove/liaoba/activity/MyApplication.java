@@ -20,7 +20,7 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         SDKInitializer.initialize(getApplicationContext());
-        CrashReport.initCrashReport(getApplicationContext(), "", false);
+        CrashReport.initCrashReport(getApplicationContext(), "900025783", false);
     }
 
     public RequestQueue getRequestQueue(){
