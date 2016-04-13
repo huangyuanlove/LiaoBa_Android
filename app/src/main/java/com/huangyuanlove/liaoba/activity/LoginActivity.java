@@ -51,7 +51,6 @@ public class LoginActivity extends BaseActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.login_activity);
         overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
-
         sharePrefrenceUtils = SharePrefrenceUtils.getInstance(LoginActivity.this);
         requestQueue = ((MyApplication) getApplication()).getRequestQueue();
         initRippleViewButton();

@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.baidu.mapapi.SDKInitializer;
+import com.tencent.bugly.crashreport.CrashReport;
 
 /**
  * Created by huangyuan on 15-12-18.
@@ -19,6 +20,7 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         SDKInitializer.initialize(getApplicationContext());
+        CrashReport.initCrashReport(getApplicationContext(), "", false);
     }
 
     public RequestQueue getRequestQueue(){
