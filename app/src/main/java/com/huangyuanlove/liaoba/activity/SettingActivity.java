@@ -8,6 +8,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -37,6 +38,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
     private UpdataBean updataBean;
     private UpdateManager mUpdateManager;
     private String version ;
+    private ImageView versionImage;
     private AlertDialog dialog;
 
     @Override
@@ -48,8 +50,8 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         mUpdateManager = new UpdateManager(this);
         version = mUpdateManager.getVersion();
 
-        initData();
         initView();
+        initData();
     }
 
     private void initData()
@@ -69,7 +71,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
                     Gson gson = new Gson();
                     updataBean = gson.fromJson(response,UpdataBean.class);
                     hasNewVersion = true;
-
+                    versionImage.setVisibility(View.VISIBLE);
                 }
             }
         }, new Response.ErrorListener() {
@@ -100,6 +102,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         aboutMe.setOnClickListener(this);
         update = (RelativeLayout) findViewById(R.id.set_update);
         update.setOnClickListener(this);
+        versionImage = (ImageView) findViewById(R.id.version);
         getSupportActionBar().setTitle("设置");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
