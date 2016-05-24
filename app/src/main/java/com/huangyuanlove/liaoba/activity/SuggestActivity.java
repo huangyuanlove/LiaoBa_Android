@@ -99,7 +99,7 @@ public class SuggestActivity extends AppCompatActivity implements View.OnClickLi
                 SimpleDateFormat sdf = new SimpleDateFormat("yy年MM月dd日 hh:mm:ss");
                 String time = sdf.format(new Date());
                 Map<String,String> map = new HashMap<>();
-                map.put("userid",sharePrefrenceUtils.getString("userid"));
+                map.put("uuid",sharePrefrenceUtils.getString("uuid"));
                 map.put("time",time);
                 map.put("content",suggestEdit.getText().toString().trim());
                 return map;

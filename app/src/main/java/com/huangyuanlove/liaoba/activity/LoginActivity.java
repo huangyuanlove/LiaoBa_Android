@@ -156,7 +156,7 @@ public class LoginActivity extends BaseActivity {
                             UserBean user = gson.fromJson(response, UserBean.class);
                             if (user != null) {
                                 sharePrefrenceUtils.setString("userid", user.getUserid());
-                                sharePrefrenceUtils.setString("record", user.getRecord());
+                                sharePrefrenceUtils.setFloat("record", user.getRecord());
                                 sharePrefrenceUtils.setString("uuid", user.getUuid());
                                 if (saveStatus.isChecked()) {
                                     sharePrefrenceUtils.setString("password", user.getPassword());

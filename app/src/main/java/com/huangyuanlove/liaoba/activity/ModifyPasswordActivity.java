@@ -115,7 +115,7 @@ public class ModifyPasswordActivity extends AppCompatActivity implements View.On
                             UserBean user = gson.fromJson(response, UserBean.class);
                             if (user != null) {
                                 sharePrefrenceUtils.setString("userid", user.getUserid());
-                                sharePrefrenceUtils.setString("record", user.getRecord());
+                                sharePrefrenceUtils.setFloat("record", user.getRecord());
                                 sharePrefrenceUtils.setString("uuid", user.getUuid());
                                 if (sharePrefrenceUtils.getBoolean("isSaveStatus", false)) {
                                     sharePrefrenceUtils.setString("password", user.getPassword());
@@ -143,13 +143,13 @@ public class ModifyPasswordActivity extends AppCompatActivity implements View.On
             protected Map<String, String> getParams() throws AuthFailureError {
                 String userid = sharePrefrenceUtils.getString("userid");
                 String uuid=sharePrefrenceUtils.getString("uuid");
-                String record=sharePrefrenceUtils.getString("record");
+                float record=sharePrefrenceUtils.getFloat("record");
                 Map<String,String> map = new HashMap<>();
                 map.put("userid",userid);
                 map.put("oldPassword",oldPassword.getText().toString().trim());
                 map.put("newPassword",newPaddword.getText().toString().trim());
                 map.put("uuid",uuid);
-                map.put("record",record);
+                map.put("record",record+"");
                 return  map;
             }
         };

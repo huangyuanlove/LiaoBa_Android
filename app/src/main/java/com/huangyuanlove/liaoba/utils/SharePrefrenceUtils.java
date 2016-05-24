@@ -110,6 +110,23 @@ public class SharePrefrenceUtils {
 		editor.commit();
 	}
 
+	/*
+	保存Float类型的
+	 */
+	public void setFloat(String name, float value) {
+		Editor editor = mPreferences.edit();
+		editor.putFloat(name, value);
+		editor.commit();
+	}
+
+	/**
+	 读取Float类型
+ 	 * @return
+	 */
+
+	public float getFloat(String name) {
+		return mPreferences.getFloat(name.toString(), 0);
+	}
 
 	public Map<String,?> getAll(){
 		return mPreferences.getAll();

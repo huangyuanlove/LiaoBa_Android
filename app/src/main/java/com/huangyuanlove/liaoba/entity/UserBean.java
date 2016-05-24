@@ -9,7 +9,7 @@ public class UserBean {
     private String userid;
     private String password;
     private String uuid;
-    private String record;
+    private float record;
 
 
     public String getUserid() {
@@ -32,15 +32,15 @@ public class UserBean {
         return uuid;
     }
 
-    public void setUuid(String UUID) {
-        this.uuid = UUID;
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
-    public String getRecord() {
+    public float getRecord() {
         return record;
     }
 
-    public void setRecord(String record) {
+    public void setRecord(float record) {
         this.record = record;
     }
 }

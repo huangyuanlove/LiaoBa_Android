@@ -188,7 +188,7 @@ public class ChatFragment extends Fragment {
                         @Override
                         protected Map<String, String> getParams() {
                             Map<String,String> map = new HashMap<>();
-                            map.put("userid",sharePrefrenceUtils.getString("userid"));
+                            map.put("uuid",sharePrefrenceUtils.getString("uuid"));
                             map.put("content",content);
                             return map;
 
