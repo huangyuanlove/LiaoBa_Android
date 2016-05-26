@@ -50,12 +50,8 @@ public class Config {
     public static final String SUGGEST_URL = BASE_URL + "suggest.do";
     //检查更新接口
     public static final String CHEKC_UPDATA_URL = BASE_URL + "updata.do";
-    //登录接口
-    //public static final String LOGIN_URL = "http://192.168.99.108:8080/LiaoBa/login.do";
-    //注册接口
-    //public static final String REGISTER_URL = "http://192.168.99.108:8080/LiaoBa/regiser.do";
-    //修改密码接口
-    //public static final String MODIFYPASSWORD_URL = "http://192.168.99.108:8080/LiaoBa/modifypassword.do";
-    //聊天记录接口
-    //public static final String CHATLOG_URL = "http://192.168.99.108:8080/LiaoBa/chatlog.do";
+    //上传通关记录接口
+    public static final String UPDATE_RECORD_URL = BASE_URL + "updatarecord.do";
+    //查看记录接口
+    public static final String SHOW_RECORD_URL = BASE_URL + "sort.do";
 }

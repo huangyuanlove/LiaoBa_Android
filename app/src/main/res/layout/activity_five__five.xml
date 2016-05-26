@@ -6,20 +6,27 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".activity.MainActivity" >
+    tools:context=".activity.MainActivity">
 
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_horizontal"
+        android:text="0" />
 
     <GridView
         android:id="@+id/five_five_gridView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_above="@id/time"
         android:columnWidth="25dp"
         android:gravity="center"
         android:horizontalSpacing="3dp"
         android:numColumns="5"
         android:stretchMode="columnWidth"
-        android:verticalSpacing="3dp"
-        />
+        android:verticalSpacing="3dp" />
 
 
 </RelativeLayout>

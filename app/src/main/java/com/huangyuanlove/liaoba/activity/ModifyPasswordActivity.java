@@ -115,7 +115,7 @@ public class ModifyPasswordActivity extends AppCompatActivity implements View.On
                             UserBean user = gson.fromJson(response, UserBean.class);
                             if (user != null) {
                                 sharePrefrenceUtils.setString("userid", user.getUserid());
-                                sharePrefrenceUtils.setFloat("record", user.getRecord());
+                                sharePrefrenceUtils.setFloat("record", (float)(user.getRecord()/1.0));
                                 sharePrefrenceUtils.setString("uuid", user.getUuid());
                                 if (sharePrefrenceUtils.getBoolean("isSaveStatus", false)) {
                                     sharePrefrenceUtils.setString("password", user.getPassword());
