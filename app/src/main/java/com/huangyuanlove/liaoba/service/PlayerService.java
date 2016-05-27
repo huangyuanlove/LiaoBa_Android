@@ -18,7 +18,7 @@ import com.huangyuanlove.liaoba.utils.Config;
 
 public class PlayerService extends Service {
 
-    private MediaPlayer mPlayer;
+    public static MediaPlayer mPlayer;
     private int sumLen;
     private LocalBroadcastManager localBroadcastManager;
     private SeekToReceiver myReceiver;
@@ -27,9 +27,11 @@ public class PlayerService extends Service {
     public void onCreate() {
         super.onCreate();
         // 实例化MediaPalyer
-        mPlayer = MediaPlayer
-                .create(getApplicationContext(), R.raw.leidegaobai);
-        localBroadcastManager = LocalBroadcastManager
+        if(mPlayer == null) {
+            mPlayer = MediaPlayer
+                    .create(getApplicationContext(), R.raw.leidegaobai);
+        }
+            localBroadcastManager = LocalBroadcastManager
                 .getInstance(getApplicationContext());
         myReceiver = new SeekToReceiver();
         localBroadcastManager.registerReceiver(myReceiver, new IntentFilter(Config.ACTION_SEEKTO));

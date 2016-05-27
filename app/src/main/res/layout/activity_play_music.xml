@@ -16,6 +16,14 @@
         android:onClick="play"
         />
 
+    <Button
+        android:id="@+id/EQ"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="音效调节"
+        />
+
 
     <Button
         android:id="@+id/stop"

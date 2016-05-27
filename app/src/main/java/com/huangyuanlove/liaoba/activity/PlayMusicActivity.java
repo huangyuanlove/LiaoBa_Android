@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -60,6 +61,9 @@ public class PlayMusicActivity extends AppCompatActivity {
     private MusicAdapter adapter;
     private SideBar sideBar;
     private TextView dialog;
+    private Button EQButton ;
+    private MediaPlayer mMediaPlayer;
+    private int playIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,6 +112,14 @@ public class PlayMusicActivity extends AppCompatActivity {
     }
 
     private void initView() {
+
+        EQButton = (Button) findViewById(R.id.EQ);
+        EQButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(PlayMusicActivity.this,EQActivity.class));
+            }
+        });
         listView = (ListView) findViewById(R.id.listView);
         dialog = (TextView) findViewById(R.id.music_dialog_text);
         sideBar = (SideBar) findViewById(R.id.sideBar);
@@ -135,12 +147,37 @@ public class PlayMusicActivity extends AppCompatActivity {
                                     int position, long id) {
                 MusicBean musicBean = (MusicBean) parent.getItemAtPosition(position);
                 String path = musicBean.getMusicPath();
+                playIndex = position;
                 playerIntent.putExtra(Config.EXSTRA_CHANGE, true);
                 playerIntent.putExtra(Config.EXSTRA_PATH, path);
                 startService(playerIntent);
 
             }
         });
+
+        // Create the MediaPlayer
+        if(PlayerService.mPlayer == null)
+        {
+            PlayerService.mPlayer = MediaPlayer
+                    .create(getApplicationContext(), R.raw.leidegaobai);
+        }
+
+        mMediaPlayer = PlayerService.mPlayer;
+        mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                playIndex +=1;
+                if(playIndex>datas.size())
+                {
+                    playIndex = 0;
+                }
+                playerIntent.putExtra(Config.EXSTRA_CHANGE, true);
+                playerIntent.putExtra(Config.EXSTRA_PATH, datas.get(playIndex).getMusicPath());
+                startService(playerIntent);
+            }
+        });
+
+
     }
 
 
