@@ -7,12 +7,7 @@ import android.animation.ValueAnimator;
 import android.os.Build;
 import android.view.animation.LinearInterpolator;
 
-/**
- * Titanic
- * User: romainpiel
- * Date: 14/03/2014
- * Time: 09:34
- */
+
 public class Titanic {
 
     private AnimatorSet animatorSet;

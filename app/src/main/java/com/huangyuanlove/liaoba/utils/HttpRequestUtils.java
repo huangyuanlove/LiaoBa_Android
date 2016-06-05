@@ -10,12 +10,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-/**
- * Http请求的工具类
- * 
- * @author Tailyou
- * 
- */
 public class HttpRequestUtils {
 
 	private static final int TIMEOUT_IN_MILLIONS = 50000;

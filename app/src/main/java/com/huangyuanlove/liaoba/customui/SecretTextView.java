@@ -9,9 +9,7 @@ import android.text.style.ForegroundColorSpan;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
-/**
- * Created by matt on 5/27/14.
- */
+
 public class SecretTextView extends TextView {
     private String mTextString;
     private SpannableString mSpannableString;

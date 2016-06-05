@@ -1,16 +1,11 @@
 package com.special.ResideMenu;
 
-
-
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * Created by thonguyen on 15/4/14.
- */
 class TouchDisableView extends ViewGroup {
 
     private View mContent;

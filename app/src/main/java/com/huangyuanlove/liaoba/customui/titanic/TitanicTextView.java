@@ -13,12 +13,6 @@ import android.widget.TextView;
 
 import com.huangyuanlove.liaoba.R;
 
-
-/**
- * Titanic
- * romainpiel
- * 13/03/2014
- */
 public class TitanicTextView extends TextView {
 
     public interface AnimationSetupCallback {
