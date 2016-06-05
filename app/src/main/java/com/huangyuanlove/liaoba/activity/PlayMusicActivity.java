@@ -86,7 +86,12 @@ public class PlayMusicActivity extends AppCompatActivity {
             MusicBean bean = new MusicBean();
             String musicName = musicListCursor.getString(1);
             String sortkey = pinYin.String2Alpha(musicName).charAt(0)+"";
-            int musicTime = Integer.parseInt(musicListCursor.getString(2));
+            int musicTime = 0;
+            if(musicListCursor.getString(2) != null)
+            {
+                musicTime =
+            Integer.parseInt(musicListCursor.getString(2));
+            }
             bean.setSortKey(sortkey);
             bean.setMusicName(musicName);
             bean.setMusicTime(sdf.format(musicTime));
