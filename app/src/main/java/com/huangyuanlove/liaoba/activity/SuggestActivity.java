@@ -100,6 +100,7 @@ public class SuggestActivity extends AppCompatActivity implements View.OnClickLi
                 String time = sdf.format(new Date());
                 Map<String,String> map = new HashMap<>();
                 map.put("uuid",sharePrefrenceUtils.getString("uuid"));
+                map.put("userid",sharePrefrenceUtils.getString("userid"));
                 map.put("time",time);
                 map.put("content",suggestEdit.getText().toString().trim());
                 return map;
