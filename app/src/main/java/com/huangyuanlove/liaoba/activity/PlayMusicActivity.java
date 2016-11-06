@@ -1,5 +1,6 @@
 package com.huangyuanlove.liaoba.activity;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -21,6 +22,7 @@ import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.huangyuanlove.liaoba.R;
 import com.huangyuanlove.liaoba.adapter.MusicAdapter;
@@ -36,13 +38,13 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class PlayMusicActivity extends AppCompatActivity {
+public class PlayMusicActivity extends Activity {
 
-    private Button stopButton;
     private Button startButton;
     private Intent playerIntent;
     private boolean isPlayer;
     private SeekBar seekBar;
+    private TextView noMusic;
     private MyReceiver myReceiver;
     private LocalBroadcastManager localBroadcastManager;
     private TextView timeTextView;
@@ -61,7 +63,7 @@ public class PlayMusicActivity extends AppCompatActivity {
     private MusicAdapter adapter;
     private SideBar sideBar;
     private TextView dialog;
-    private Button EQButton ;
+    private Button EQButton;
     private MediaPlayer mMediaPlayer;
     private int playIndex;
 
@@ -85,12 +87,11 @@ public class PlayMusicActivity extends AppCompatActivity {
         while (musicListCursor.moveToNext()) {
             MusicBean bean = new MusicBean();
             String musicName = musicListCursor.getString(1);
-            String sortkey = pinYin.String2Alpha(musicName).charAt(0)+"";
+            String sortkey = pinYin.String2Alpha(musicName).charAt(0) + "";
             int musicTime = 0;
-            if(musicListCursor.getString(2) != null)
-            {
+            if (musicListCursor.getString(2) != null) {
                 musicTime =
-            Integer.parseInt(musicListCursor.getString(2));
+                        Integer.parseInt(musicListCursor.getString(2));
             }
             bean.setSortKey(sortkey);
             bean.setMusicName(musicName);
@@ -113,16 +114,17 @@ public class PlayMusicActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
 
 
-
     }
 
     private void initView() {
 
+
+        noMusic = (TextView) findViewById(R.id.no_music);
         EQButton = (Button) findViewById(R.id.EQ);
         EQButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(PlayMusicActivity.this,EQActivity.class));
+                startActivity(new Intent(PlayMusicActivity.this, EQActivity.class));
             }
         });
         listView = (ListView) findViewById(R.id.listView);
@@ -137,7 +139,6 @@ public class PlayMusicActivity extends AppCompatActivity {
         });
         timeTextView = (TextView) findViewById(R.id.time);
         startButton = (Button) findViewById(R.id.start);
-        stopButton = (Button) findViewById(R.id.stop);
         seekBar = (SeekBar) findViewById(R.id.seekBar);
         playerIntent = new Intent(getApplicationContext(), PlayerService.class);
         myReceiver = new MyReceiver();
@@ -159,10 +160,9 @@ public class PlayMusicActivity extends AppCompatActivity {
 
             }
         });
-
+        listView.setEmptyView(noMusic);
         // Create the MediaPlayer
-        if(PlayerService.mPlayer == null)
-        {
+        if (PlayerService.mPlayer == null) {
             PlayerService.mPlayer = MediaPlayer
                     .create(getApplicationContext(), R.raw.leidegaobai);
         }
@@ -171,9 +171,14 @@ public class PlayMusicActivity extends AppCompatActivity {
         mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
-                playIndex +=1;
-                if(playIndex>datas.size())
+                if (datas.size()==0)
                 {
+                    play(null);
+                    return ;
+
+                }
+                playIndex += 1;
+                if (playIndex > datas.size()) {
                     playIndex = 0;
                 }
                 playerIntent.putExtra(Config.EXSTRA_CHANGE, true);
@@ -214,18 +219,18 @@ public class PlayMusicActivity extends AppCompatActivity {
         playerIntent.putExtra(Config.EXSTRA_CHANGE, false);
 
         startService(playerIntent);
-        isPlayer = !isPlayer;
-        if (isPlayer) {
-            startButton.setText("暂停");
-        } else {
+
+        if(mMediaPlayer.isPlaying())
+        {
             startButton.setText("播放");
+        }
+        else
+        {
+            startButton.setText("暂停");
         }
 
     }
 
-    public void stop(View v) {
-        stopService(playerIntent);
-    }
 
     class MyReceiver extends BroadcastReceiver {
 
@@ -254,10 +259,8 @@ public class PlayMusicActivity extends AppCompatActivity {
                     return i;
                 }
             }
-        }
-        else
-        {
-            Log.e("------->>>","数据为空");
+        } else {
+            Log.e("------->>>", "数据为空");
         }
         return -1;
     }

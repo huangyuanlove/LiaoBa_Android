@@ -25,6 +25,19 @@
             android:layout_above="@id/secretTextView"
             android:layout_centerHorizontal="true"
             />
+    <RelativeLayout
+        android:id="@+id/rl_splash"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="80dp"
+        >
 
+        <View
+            android:id="@+id/view_divider"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_alignParentBottom="true"
+            />
+    </RelativeLayout >
 
 </RelativeLayout>

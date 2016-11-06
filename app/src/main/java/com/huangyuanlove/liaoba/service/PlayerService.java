@@ -69,7 +69,6 @@ public class PlayerService extends Service {
     @Override
     public void onDestroy() {
         mPlayer.stop();
-//        mPlayer.release();
         localBroadcastManager.unregisterReceiver(myReceiver);
         super.onDestroy();
     }

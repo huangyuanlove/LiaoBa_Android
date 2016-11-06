@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:text="sortkey"
         android:textSize="24dp"
-        android:textColor="#aaaaaaaa"
+        android:textColor="#abcdef"
         />
 
     <TextView
@@ -25,8 +25,8 @@
         android:layout_height="wrap_content"
         android:maxLines="2"
         android:ellipsize="end"
-        android:textSize="20sp"
-        android:textColor="#00f"
+        android:textSize="16sp"
+        android:textColor="#778899"
         android:paddingTop="2dp"
         android:text="文件名"
         />
@@ -37,8 +37,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:textSize="20sp"
-        android:textColor="#0ff"
+        android:textSize="14sp"
+        android:textColor="#808080"
         android:paddingTop="2dp"
         android:text="时长"
         />

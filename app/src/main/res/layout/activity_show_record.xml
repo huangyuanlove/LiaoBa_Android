@@ -8,8 +8,34 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.huangyuanlove.liaoba.activity.ShowRecordActivity">
-
+    <LinearLayout
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1"
+        >
+        <TextView
+            android:layout_weight="0.5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="昵称"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            />
+        <TextView
+            android:layout_weight="0.5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="记录"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            />
+    </LinearLayout>
     <ListView
+        android:layout_below="@id/title"
         android:id="@+id/show_record_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

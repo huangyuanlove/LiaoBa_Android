@@ -60,8 +60,6 @@ public class ChatFragment extends Fragment {
     private Button sendMsg;
     private ClipboardManager clipboardManager;
     private ActionBar actionBar;
-//    private SharedPreferences sharedPreferences;
-//    private SharedPreferences.Editor editor;
     private SharePrefrenceUtils sharePrefrenceUtils;
     private PopupMenu pm;
     private Menu menu;
@@ -149,12 +147,6 @@ public class ChatFragment extends Fragment {
                         return ;
                     }
 
-                    if (!hideFunction.containsKey("map") && content.contains("地图")) {
-                        sharePrefrenceUtils.setBoolean("map", true);
-                        Toast.makeText(getActivity(), "恭喜解锁隐藏功能，请到隐藏属性菜单查看", Toast.LENGTH_SHORT).show();
-                        sharePrefrenceUtils.setBoolean("hasHideFunction", true);
-                        return ;
-                    }
                     if (!hideFunction.containsKey("music") && content.contains("音乐")) {
                         sharePrefrenceUtils.setBoolean("music", true);
                         Toast.makeText(getActivity(), "恭喜解锁隐藏功能，请到隐藏属性菜单查看", Toast.LENGTH_SHORT).show();

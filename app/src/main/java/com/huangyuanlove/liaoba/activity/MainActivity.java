@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -128,9 +127,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Map<String, ?> hideFunction = sharePrefrenceUtils.getAll();
                     if (hideFunction.containsKey("game")) {
                         initHideFunctionView(gameButton, Five_Five_Activity.class);
-                    }
-                    if (hideFunction.containsKey("map")) {
-                        initHideFunctionView(mapButton, BaiduMapActivity.class);
                     }
                     if (hideFunction.containsKey("music")) {
                         initHideFunctionView(musicButton, PlayMusicActivity.class);

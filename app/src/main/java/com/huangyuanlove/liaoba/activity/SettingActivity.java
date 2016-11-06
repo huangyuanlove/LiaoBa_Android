@@ -145,11 +145,11 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         dialog = new AlertDialog.Builder(this)
                 .setCancelable(true)
                 .setTitle("关于作者")
-                .setMessage("计科1203--黄沅\n指导教师：李盘靖")
+                .setMessage("HuangYuan_xuan:什么都懂一点的android攻城狮")
                 .setPositiveButton("博客", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Uri uri = Uri.parse("http://blog.csdn.net/huangyuan_xuan?viewmode=contents");
+                        Uri uri = Uri.parse("https://huangyuanlove.github.io");
                         intent.setData(uri);
                         startActivity(intent);
                         dialog.cancel();

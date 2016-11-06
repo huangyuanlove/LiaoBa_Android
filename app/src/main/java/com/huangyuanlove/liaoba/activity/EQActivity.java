@@ -1,5 +1,6 @@
 package com.huangyuanlove.liaoba.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -22,7 +23,7 @@ import android.widget.TextView;
 import com.huangyuanlove.liaoba.R;
 import com.huangyuanlove.liaoba.service.PlayerService;
 
-public class EQActivity extends AppCompatActivity implements View.OnClickListener {
+public class EQActivity extends Activity implements View.OnClickListener {
 
     private TextView Normal;
     private TextView Classical;
@@ -47,8 +48,6 @@ public class EQActivity extends AppCompatActivity implements View.OnClickListene
 
     private LinearLayout mLinearLayout;
     private VisualizerView mVisualizerView;
-//    private TextView mInfoView;
-
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
@@ -121,15 +120,6 @@ public class EQActivity extends AppCompatActivity implements View.OnClickListene
         EQTextView[9] = Rock;
         Rock.setOnClickListener(this);
 
-        short num = mEqualizer.getNumberOfPresets();
-
-        for (short i = 0; i < num; i++) {
-
-            System.out.println(i+":" + mEqualizer.getPresetName(i));
-
-        }
-
-
     }
 
     private void setupEqualizerFxAndUI() {
@@ -140,6 +130,8 @@ public class EQActivity extends AppCompatActivity implements View.OnClickListene
 
         TextView eqTextView = new TextView(this);
         eqTextView.setText("均衡器:");
+
+
         mLinearLayout.addView(eqTextView);
 
         short bands = mEqualizer.getNumberOfBands();

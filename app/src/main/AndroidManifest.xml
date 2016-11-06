@@ -18,6 +18,9 @@
     <uses-permission android:name="android.permission.READ_LOGS" />
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+
     <application
         android:name=".activity.MyApplication"
         android:allowBackup="true"
@@ -30,8 +33,7 @@
             android:value="WxxQaxOLOhDEg9Uscz5OcnBs" />
 
         <activity
-            android:name=".activity.WelcomeActivity"
-            android:theme="@style/Theme.AppCompat.Dialog">
+            android:name=".activity.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -50,16 +52,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.BaiduMapActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity
-            android:name=".activity.PlayMusicActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:name=".activity.PlayMusicActivity" />
 
-        <service
-            android:name="com.baidu.location.f"
-            android:enabled="true"
-            android:process=":remote" />
         <service
             android:name=".service.PlayerService"
             android:enabled="true"
@@ -70,6 +64,24 @@
         <activity android:name=".activity.SuggestActivity" />
         <activity android:name=".activity.ShowRecordActivity" />
         <activity android:name=".activity.EQActivity"></activity>
+        <!-- 有米广告-->
+        <activity
+            android:name="net.youmi.android.AdBrowser"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <service
+            android:name="net.youmi.android.AdService"
+            android:exported="false" >
+        </service>
+        <receiver
+            android:name="net.youmi.android.AdReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+        <!--有米广告结束-->
     </application>
 
 </manifest>
