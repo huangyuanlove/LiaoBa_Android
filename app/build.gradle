@@ -30,5 +30,4 @@ dependencies {
     compile 'asia.ivity.android:drag-sort-listview:1.0'
     compile files('libs/locSDK_6.13.jar')
     compile files('libs/bugly_crash_release__2.1.jar')
-    compile files('libs/YoumiSdk_v6.3.0_2016-09-08.jar')
 }

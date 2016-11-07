@@ -19,7 +19,6 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        SDKInitializer.initialize(getApplicationContext());
         CrashReport.initCrashReport(getApplicationContext(), "900025783", false);
     }
 
