@@ -37,6 +37,7 @@ public class ShowRecordActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_record);
         listView = (ListView) findViewById(R.id.show_record_list);
+        listView.setDividerHeight(0);
         requestQueue = ((MyApplication) getApplication()).getRequestQueue();
         initData();
     }

@@ -159,7 +159,7 @@ public class LoginActivity extends BaseActivity {
                                 sharePrefrenceUtils.setFloat("record", (float)(user.getRecord()/1.0));
                                 sharePrefrenceUtils.setString("uuid", user.getUuid());
                                 if (saveStatus.isChecked()) {
-                                    sharePrefrenceUtils.setString("password", user.getPassword());
+                                    sharePrefrenceUtils.setString("password", password_editText.getText().toString().trim());
                                 }
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(intent);
@@ -178,7 +178,6 @@ public class LoginActivity extends BaseActivity {
                     }
                 }) {
                     @Override
-//                            username=huangyuan&userPassword=amw
                     protected Map<String, String> getParams() {
                         Map<String, String> map = new HashMap<>();
                         map.put("userid", username_editText.getText().toString().trim());

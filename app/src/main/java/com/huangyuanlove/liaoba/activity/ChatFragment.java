@@ -88,7 +88,7 @@ public class ChatFragment extends Fragment {
         messageListView.setEmptyView(emptyTextView);
         messageAdapter = new MessageAdapter(getActivity(), R.layout.item_msg, messageList);
         messageListView.setAdapter(messageAdapter);
-
+        messageListView.setDividerHeight(0);
         messageListView.setDropListener(new DragSortListView.DropListener() {
             @Override
             public void drop(int i, int i1) {

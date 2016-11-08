@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.huangyuanlove.liaoba.R;
@@ -58,8 +59,8 @@ public class MessageAdapter extends BaseAdapter  {
         if (convertView == null) {
             view = LayoutInflater.from(context).inflate(resourceID, null);
             viewHolder = new ViewHolder();
-            viewHolder.leftLayout = (LinearLayout) view.findViewById(R.id.left_layout);
-            viewHolder.rightLayout = (LinearLayout) view.findViewById(R.id.right_layout);
+            viewHolder.leftLayout = (RelativeLayout) view.findViewById(R.id.left_layout);
+            viewHolder.rightLayout = (RelativeLayout) view.findViewById(R.id.right_layout);
             viewHolder.leftMessage = (TextView) view.findViewById(R.id.left_message);
             viewHolder.leftMessage.setTag(position);
             viewHolder.rightMessage = (TextView) view.findViewById(R.id.right_message);
@@ -88,8 +89,8 @@ public class MessageAdapter extends BaseAdapter  {
 
 
     class ViewHolder {
-        LinearLayout leftLayout;
-        LinearLayout rightLayout;
+        RelativeLayout leftLayout;
+        RelativeLayout rightLayout;
         TextView leftMessage;
         TextView rightMessage;
     }

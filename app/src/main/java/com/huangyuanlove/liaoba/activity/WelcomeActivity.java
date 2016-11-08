@@ -91,8 +91,8 @@ public class WelcomeActivity extends Activity {
 
                 if (isSaveStatus) {
 
-                    final String userid = sharePrefrenceUtils.getString("");
-                    final String password = sharePrefrenceUtils.getString("");
+                    final String userid = sharePrefrenceUtils.getString("userid");
+                    final String password = sharePrefrenceUtils.getString("password");
 
                     StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.LOGIN_URL, new Response.Listener<String>() {
                         @Override
@@ -103,6 +103,7 @@ public class WelcomeActivity extends Activity {
                                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 
                             } else {
+                                sharePrefrenceUtils.setBoolean("isSaveStatus", false);
                                 Toast.makeText(WelcomeActivity.this, "帐号或密码错误", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(WelcomeActivity.this, LoginActivity.class);
                                 startActivity(intent);
