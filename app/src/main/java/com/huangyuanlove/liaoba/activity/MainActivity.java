@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.huangyuanlove.liaoba.R;
 import com.huangyuanlove.liaoba.customui.indris.material.RippleView;
+import com.huangyuanlove.liaoba.utils.ActivityCollector;
 import com.huangyuanlove.liaoba.utils.Config;
 import com.huangyuanlove.liaoba.utils.SharePrefrenceUtils;
 import com.special.ResideMenu.ResideMenu;
@@ -34,7 +35,7 @@ import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, OnMenuItemClickListener, OnMenuItemLongClickListener, ChatFragment.ChatFragmentCallBack {
-
+    private double mExitTime;
     private ResideMenu mResideMenu;
     private ContextMenuDialogFragment mMenuDialogFragment;
     private FragmentManager mFragmentManager;
@@ -81,8 +82,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
+
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            moveTaskToBack(false);
+            if ((System.currentTimeMillis() - mExitTime) > 2000) {
+                Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+                mExitTime = System.currentTimeMillis();
+            } else {
+               finish();
+            }
             return true;
         }
         return super.onKeyDown(keyCode, event);

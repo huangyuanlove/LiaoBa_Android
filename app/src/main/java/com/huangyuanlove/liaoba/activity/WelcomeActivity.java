@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Window;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -22,6 +24,8 @@ import com.huangyuanlove.liaoba.customui.titanic.TitanicTextView;
 import com.huangyuanlove.liaoba.utils.Config;
 import com.huangyuanlove.liaoba.utils.PermissionHelper;
 import com.huangyuanlove.liaoba.utils.SharePrefrenceUtils;
+import com.qq.e.ads.splash.SplashAD;
+import com.qq.e.ads.splash.SplashADListener;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -41,6 +45,7 @@ public class WelcomeActivity extends Activity {
     private boolean isSaveStatus;
     private SharePrefrenceUtils sharePrefrenceUtils;
     private PermissionHelper mPermissionHelper;
+    private FrameLayout addContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,34 +54,59 @@ public class WelcomeActivity extends Activity {
         setContentView(R.layout.welcome_activity);
         overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
         sharePrefrenceUtils = SharePrefrenceUtils.getInstance(WelcomeActivity.this);
-        secretTextView = (SecretTextView) findViewById(R.id.secretTextView);
-        TitanicTextView titanicTextView = (TitanicTextView) findViewById(R.id.titanic_textView);
-        requestQueue = ((MyApplication) getApplication()).getRequestQueue();
-        Titanic titanic = new Titanic();
-        titanic.start(titanicTextView);
-
         isSaveStatus = sharePrefrenceUtils.getBoolean("isSaveStatus", false);
-        new Timer().schedule(new TimerTask() {
-            @Override
-            public void run() {
-                Message msg = new Message();
-                msg.what = START_ANIMOTION;
-                mHandler.sendMessage(msg);
-            }
-        }, 1000);
-
-        new Timer().schedule(new TimerTask() {
-            @Override
-            public void run() {
-                Message msg = Message.obtain();
-                msg.what = START_ACTIVITY;
-                mHandler.sendMessage(msg);
-            }
-        }, 4000);
-
+        addContainer = (FrameLayout) findViewById(R.id.splashcontainer);
+        requestQueue = ((MyApplication) getApplication()).getRequestQueue();
+        requestPermissoon();
 
 
     }
+
+    private void runAPP(){
+        new SplashAD(this, addContainer, "1105732337", "8090511616945912", new SplashADListener() {
+            @Override
+            public void onADDismissed() {
+
+                if(isSaveStatus) {
+                    new Timer().schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            Message msg = Message.obtain();
+                            msg.what = START_ACTIVITY;
+                            mHandler.sendMessage(msg);
+                        }
+                    }, 0);
+
+                }
+                else
+                {
+                    Intent intent = new Intent(WelcomeActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    WelcomeActivity.this.finish();
+                }
+            }
+
+            @Override
+            public void onNoAD(int i) {
+                loadAdFaile();
+            }
+
+            @Override
+            public void onADPresent() {
+            }
+
+            @Override
+            public void onADClicked() {
+            }
+
+            @Override
+            public void onADTick(long l) {
+
+            }
+        });
+    }
+
+
 
     Handler mHandler = new Handler() {
         @Override
@@ -117,7 +147,6 @@ public class WelcomeActivity extends Activity {
                         }
                     }) {
                         @Override
-//                            username=huangyuan&userPassword=amw
                         protected Map<String, String> getParams() {
                             Map<String, String> map = new HashMap<>();
                             map.put("userid", userid);
@@ -139,32 +168,61 @@ public class WelcomeActivity extends Activity {
         }
     };
 
-    @Override
-    protected void onResume() {
-        super.onResume();
+
+    private void loadAdFaile()
+    {
+        secretTextView = (SecretTextView) findViewById(R.id.secretTextView);
+        TitanicTextView titanicTextView = (TitanicTextView) findViewById(R.id.titanic_textView);
+
+        Titanic titanic = new Titanic();
+        titanic.start(titanicTextView);
+
+
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Message msg = new Message();
+                msg.what = START_ANIMOTION;
+                mHandler.sendMessage(msg);
+            }
+        }, 1000);
+
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Message msg = Message.obtain();
+                msg.what = START_ACTIVITY;
+                mHandler.sendMessage(msg);
+            }
+        }, 4000);
+    }
+
+
+    private void requestPermissoon()
+    {
         // 当系统为6.0以上时，需要申请权限
         mPermissionHelper = new PermissionHelper(this);
         mPermissionHelper.setOnApplyPermissionListener(new PermissionHelper.OnApplyPermissionListener() {
             @Override
             public void onAfterApplyAllPermission() {
-                Log.i("huangyuan", "All of requested permissions has been granted, so run app logic.");
+                runAPP();
             }
         });
         if (Build.VERSION.SDK_INT < 23) {
             // 如果系统版本低于23，直接跑应用的逻辑
-            Log.d("huangyuan", "The api level of system is lower than 23, so run app logic directly.");
+            runAPP();
         } else {
-            // 如果权限全部申请了，那就直接跑应用逻辑
+            // 如果权限全部申请了，直接跑应用逻辑
             if (mPermissionHelper.isAllRequestedPermissionGranted()) {
-                Log.d("huangyuan", "All of requested permissions has been granted, so run app logic directly.");
+                runAPP();
             } else {
                 // 如果还有权限为申请，而且系统版本大于23，执行申请权限逻辑
                 Log.i("huangyuan", "Some of requested permissions hasn't been granted, so apply permissions first.");
                 mPermissionHelper.applyPermissions();
             }
         }
-
     }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
@@ -177,5 +235,15 @@ public class WelcomeActivity extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
         mPermissionHelper.onActivityResult(requestCode, resultCode, data);
     }
+
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        //阻止用户在展示过程中点击手机返回键
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
 
 }

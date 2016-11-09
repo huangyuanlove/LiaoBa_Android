@@ -14,26 +14,11 @@ import android.util.Log;
 
 /**
  * Android 6.0 上权限分为<b>正常</b>和<b>危险</b>级别
- * <ul>
- * <li>正常级别权限：开发者仅仅需要在AndroidManifext.xml上声明，那么应用就会被允许拥有该权限，如：android.permission.INTERNET</li>
- * <li>危险级别权限：开发者需要在AndroidManifext.xml上声明，并且在运行时进行申请，而且用户允许了，应用才会被允许拥有该权限，如：android.permission.WRITE_EXTERNAL_STORAGE</li>
- * </ul>
- * 有米的以下权限需要在Android6.0上被允许，有米广告sdk才能正常工作，开发者需要在调用有米的任何代码之前，提前让用户允许权限
- * <ul>
- * <li>必须申请的权限
- * <ul>
- * <li>android.permission.READ_PHONE_STATE</li>
- * <li>android.permission.WRITE_EXTERNAL_STORAGE</li>
- * </ul>
- * </li>
- * <li>可选申请的权限
- * <ul>
- * <li>android.permission.ACCESS_FINE_LOCATION</li>
- * </ul>
- * </li>
- * </ul>
- * <p>Android 6.0 权限申请助手</p>
- * Created by Alian on 16-1-12.
+ *
+ * 正常级别权限：开发者仅仅需要在AndroidManifext.xml上声明，那么应用就会被允许拥有该权限，如：android.permission.INTERNET</li>
+ * 危险级别权限：开发者需要在AndroidManifext.xml上声明，并且在运行时进行申请，而且用户允许了，应用才会被允许拥有该权限，如：android.permission.WRITE_EXTERNAL_STORAGE</li>
+ *
+ *
  */
 public class PermissionHelper {
 
@@ -43,9 +28,10 @@ public class PermissionHelper {
 	 * 小tips:这里的int数值不能太大，否则不会弹出请求权限提示，测试的时候,改到1000就不会弹出请求了
 	 */
 	private final static int READ_PHONE_STATE_CODE = 101;
-
 	private final static int WRITE_EXTERNAL_STORAGE_CODE = 102;
-
+	private final static int ACCESS_COARSE_LOCATION = 103;
+	private final static int ACCESS_FINE_LOCATION = 104;
+	private final static int RECORD_AUDIO = 105;
 	private final static int REQUEST_OPEN_APPLICATION_SETTINGS_CODE = 12345;
 
 	/**
@@ -54,7 +40,13 @@ public class PermissionHelper {
 	private PermissionModel[] mPermissionModels = new PermissionModel[] {
 			new PermissionModel("电话", Manifest.permission.READ_PHONE_STATE, "我们需要读取手机信息的权限来标识您的身份", READ_PHONE_STATE_CODE),
 			new PermissionModel("存储空间", Manifest.permission.WRITE_EXTERNAL_STORAGE, "我们需要您允许我们读写你的存储卡，以方便我们临时保存一些数据",
-					WRITE_EXTERNAL_STORAGE_CODE)
+					WRITE_EXTERNAL_STORAGE_CODE),
+			new PermissionModel("地理位置", Manifest.permission.ACCESS_COARSE_LOCATION, "我们需要您允许我们获取您的地理位置，以方便我们推送消息",
+					ACCESS_COARSE_LOCATION),
+			new PermissionModel("地理位置", Manifest.permission.ACCESS_FINE_LOCATION, "我们需要您允许我们获取您的地理位置，以方便我们推送消息",
+                    ACCESS_FINE_LOCATION),
+            new PermissionModel("音效调节", Manifest.permission.RECORD_AUDIO, "我们需要您允许我们调节音效，以方便您在播放音乐时感受不同的音效",
+                    RECORD_AUDIO)
 	};
 
 	private Activity mActivity;
@@ -98,6 +90,9 @@ public class PermissionHelper {
 	public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
 		switch (requestCode) {
 		case READ_PHONE_STATE_CODE:
+		case ACCESS_COARSE_LOCATION:
+		case ACCESS_FINE_LOCATION:
+		case RECORD_AUDIO:
 		case WRITE_EXTERNAL_STORAGE_CODE:
 			// 如果用户不允许，我们视情况发起二次请求或者引导用户到应用页面手动打开
 			if (PackageManager.PERMISSION_GRANTED != grantResults[0]) {

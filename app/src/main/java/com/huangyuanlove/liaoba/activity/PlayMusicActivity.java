@@ -1,18 +1,24 @@
 package com.huangyuanlove.liaoba.activity;
 
+import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -22,13 +28,13 @@ import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.huangyuanlove.liaoba.R;
 import com.huangyuanlove.liaoba.adapter.MusicAdapter;
 import com.huangyuanlove.liaoba.customui.SideBar;
 import com.huangyuanlove.liaoba.entity.MusicBean;
 import com.huangyuanlove.liaoba.service.PlayerService;
+import com.huangyuanlove.liaoba.utils.ActivityCollector;
 import com.huangyuanlove.liaoba.utils.Config;
 import com.huangyuanlove.liaoba.utils.PinYin;
 
@@ -40,9 +46,11 @@ import java.util.List;
 
 public class PlayMusicActivity extends Activity {
 
+
+    private final int RECORD_AUDIO_CODE = 101;
+    private final int REQUEST_OPEN_APPLICATION_SETTINGS_CODE = 12345;
     private Button startButton;
     private Intent playerIntent;
-    private boolean isPlayer;
     private SeekBar seekBar;
     private TextView noMusic;
     private MyReceiver myReceiver;
@@ -72,7 +80,6 @@ public class PlayMusicActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_music);
         overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
-
         initView();
         initData();
         event();
@@ -124,7 +131,17 @@ public class PlayMusicActivity extends Activity {
         EQButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //检测权限
+                if (ContextCompat.checkSelfPermission(PlayMusicActivity.this,
+                        Manifest.permission.RECORD_AUDIO)
+                        == PackageManager.PERMISSION_GRANTED) {
                 startActivity(new Intent(PlayMusicActivity.this, EQActivity.class));
+                }else{
+                    ActivityCompat.requestPermissions(PlayMusicActivity.this,
+                            new String[]{Manifest.permission.RECORD_AUDIO},
+                            RECORD_AUDIO_CODE);
+                }
+
             }
         });
         listView = (ListView) findViewById(R.id.listView);
@@ -190,6 +207,62 @@ public class PlayMusicActivity extends Activity {
 
     }
 
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode){
+            case RECORD_AUDIO_CODE:
+                // 如果用户不允许，我们视情况发起二次请求或者引导用户到应用页面手动打开
+                if (PackageManager.PERMISSION_GRANTED != grantResults[0]) {
+
+                    // 二次请求，表现为：以前请求过这个权限，但是用户拒接了
+                    // 在二次请求的时候，会有一个“不再提示的”checkbox
+                    // 因此这里需要给用户解释一下我们为什么需要这个权限，否则用户可能会永久不在激活这个申请
+                    // 方便用户理解我们为什么需要这个权限
+                    if (ActivityCompat.shouldShowRequestPermissionRationale(PlayMusicActivity.this, permissions[0])) {
+                        AlertDialog.Builder builder =
+                                new AlertDialog.Builder(PlayMusicActivity.this).setTitle("权限申请").setMessage("们需要您允许我们调节音效，以方便您在播放音乐时感受不同的音效")
+                                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                ActivityCompat.requestPermissions(PlayMusicActivity.this,
+                                                        new String[]{Manifest.permission.RECORD_AUDIO},
+                                                        RECORD_AUDIO_CODE);
+                                            }
+                                        });
+                        builder.setCancelable(false);
+                        builder.show();
+                    }
+                    // 到这里就表示已经是第3+次请求，而且此时用户已经永久拒绝了，这个时候，我们引导用户到应用权限页面，让用户自己手动打开
+                    else {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(PlayMusicActivity.this).setTitle("权限申请")
+                                .setMessage("请在打开的窗口的权限中开启音效调节权限，以正常使用本应用")
+                                .setPositiveButton("去设置", new DialogInterface.OnClickListener() {
+
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        openApplicationSettings(REQUEST_OPEN_APPLICATION_SETTINGS_CODE);
+                                    }
+                                }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                    }
+                                });
+                        builder.setCancelable(false);
+                        builder.show();
+                    }
+                    return;
+                }
+
+                // 到这里就表示用户允许了本次请求
+                startActivity(new Intent(PlayMusicActivity.this, EQActivity.class));
+                break;
+
+        }
+
+    }
 
     private void event() {
         seekBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
@@ -259,11 +332,43 @@ public class PlayMusicActivity extends Activity {
                     return i;
                 }
             }
-        } else {
-            Log.e("------->>>", "数据为空");
         }
         return -1;
     }
 
+    private boolean openApplicationSettings(int requestCode) {
+        try {
+            Intent intent =
+                    new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + PlayMusicActivity.this.getPackageName()));
+            intent.addCategory(Intent.CATEGORY_DEFAULT);
 
+            // Android L 之后Activity的启动模式发生了一些变化
+            // 如果用了下面的 Intent.FLAG_ACTIVITY_NEW_TASK ，并且是 startActivityForResult
+            // 那么会在打开新的activity的时候就会立即回调 onActivityResult
+            // intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            PlayMusicActivity.this.startActivityForResult(intent, requestCode);
+            return true;
+        } catch (Throwable e) {
+
+        }
+        return false;
+    }
+
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case REQUEST_OPEN_APPLICATION_SETTINGS_CODE:
+                //检测权限
+                if (ContextCompat.checkSelfPermission(PlayMusicActivity.this,
+                        Manifest.permission.RECORD_AUDIO)
+                        == PackageManager.PERMISSION_GRANTED) {
+                    startActivity(new Intent(PlayMusicActivity.this, EQActivity.class));
+                }else{
+                    ActivityCompat.requestPermissions(PlayMusicActivity.this,
+                            new String[]{Manifest.permission.RECORD_AUDIO},
+                            RECORD_AUDIO_CODE);
+                }
+                break;
+        }
+    }
 }

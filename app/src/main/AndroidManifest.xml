@@ -61,6 +61,13 @@
         <activity android:name=".activity.SuggestActivity" />
         <activity android:name=".activity.ShowRecordActivity" />
         <activity android:name=".activity.EQActivity"></activity>
+
+
+        <!--广点通广告 begin-->
+        <service android:name="com.qq.e.comm.DownloadService" android:exported="false" />
+        <activity android:name="com.qq.e.ads.ADActivity" android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+        <!--广点通广告 end-->
+
     </application>
 
 </manifest>
