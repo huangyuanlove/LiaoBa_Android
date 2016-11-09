@@ -4,7 +4,9 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.BaseAdapter;
+import android.widget.GridLayout;
 
 import com.huangyuanlove.liaoba.R;
 
@@ -14,11 +16,19 @@ import com.huangyuanlove.liaoba.R;
 public class Five_Five_Adapter extends BaseAdapter {
     private Context context;
     private int[][] datas;
+    private WindowManager wm;
+    private int width;
 
     public Five_Five_Adapter(Context context, int[][] datas) {
         super();
         this.context = context;
         this.datas = datas;
+
+         wm = (WindowManager) context
+                .getSystemService(Context.WINDOW_SERVICE);
+
+        width = (wm.getDefaultDisplay().getWidth()-80)/5;
+
     }
 
     @Override
@@ -49,11 +59,17 @@ public class Five_Five_Adapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if(getItemViewType(position)==1){
-            convertView=LayoutInflater.from(context).inflate(R.layout.five_five_close, null);
+            convertView=LayoutInflater.from(context).inflate(R.layout.five_five_close, parent,false);
 
         }else{
-            convertView= LayoutInflater.from(context).inflate(R.layout.five_five_open,null);
+            convertView= LayoutInflater.from(context).inflate(R.layout.five_five_open,parent,false);
         }
+
+        ViewGroup.LayoutParams layoutParams = convertView.getLayoutParams();
+        layoutParams.width = width;
+        layoutParams.height = width;
+        convertView.setLayoutParams(layoutParams);
+
         return convertView;
     }
 }

@@ -8,6 +8,7 @@ import android.content.IntentFilter;
 import android.media.MediaPlayer;
 import android.os.IBinder;
 import android.support.v4.content.LocalBroadcastManager;
+import android.util.Log;
 
 import com.huangyuanlove.liaoba.R;
 import com.huangyuanlove.liaoba.utils.Config;
@@ -39,6 +40,16 @@ public class PlayerService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+
+        if(flags == Config.STOP_PLAY)
+        {
+            if(mPlayer != null)
+            {
+                mPlayer.stop();
+            }
+        }
+
+
         //判断是否播放新文件
         if(intent.getBooleanExtra(Config.EXSTRA_CHANGE, false))
         {
@@ -68,6 +79,7 @@ public class PlayerService extends Service {
 
     @Override
     public void onDestroy() {
+        Log.d("huangyuan","service stop");
         mPlayer.stop();
         localBroadcastManager.unregisterReceiver(myReceiver);
         super.onDestroy();
@@ -102,4 +114,7 @@ public class PlayerService extends Service {
         }
 
     }
+
+
+
 }

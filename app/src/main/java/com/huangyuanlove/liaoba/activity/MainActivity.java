@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.huangyuanlove.liaoba.R;
 import com.huangyuanlove.liaoba.customui.indris.material.RippleView;
+import com.huangyuanlove.liaoba.service.PlayerService;
 import com.huangyuanlove.liaoba.utils.ActivityCollector;
 import com.huangyuanlove.liaoba.utils.Config;
 import com.huangyuanlove.liaoba.utils.SharePrefrenceUtils;
@@ -88,6 +89,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
                 mExitTime = System.currentTimeMillis();
             } else {
+                Intent intent = new Intent(MainActivity.this,PlayerService.class);
+                intent.setFlags(Config.STOP_PLAY);
+                intent.setAction("media_player");
+                startService(intent);
                finish();
             }
             return true;
@@ -121,7 +126,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                SharedPreferences sharedPreferences = getApplication().getSharedPreferences("hide_function", Context.MODE_PRIVATE);
                 View hideFunctionView = LayoutInflater.from(this).inflate(R.layout.hide_function, null);
                 RippleView gameButton = (RippleView) hideFunctionView.findViewById(R.id.hide_function_game);
-                RippleView mapButton = (RippleView) hideFunctionView.findViewById(R.id.hide_function_map);
                 RippleView musicButton = (RippleView) hideFunctionView.findViewById(R.id.hide_function_music);
 
 

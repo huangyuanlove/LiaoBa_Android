@@ -12,6 +12,7 @@ public class Config {
     public static final String EXSTRA_PROGRESS_CUR = "prg_current";
     //存放boolean，true ： 播放新文件，  false： 播放与暂停
     public static final String EXSTRA_CHANGE="change";
+    public static final int STOP_PLAY = 0;
     //新文件路径
     public static final String EXSTRA_PATH="path";
 

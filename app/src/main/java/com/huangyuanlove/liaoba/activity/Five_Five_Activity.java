@@ -8,13 +8,13 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +27,9 @@ import com.huangyuanlove.liaoba.R;
 import com.huangyuanlove.liaoba.adapter.Five_Five_Adapter;
 import com.huangyuanlove.liaoba.utils.Config;
 import com.huangyuanlove.liaoba.utils.SharePrefrenceUtils;
+import com.qq.e.ads.banner.ADSize;
+import com.qq.e.ads.banner.AbstractBannerADListener;
+import com.qq.e.ads.banner.BannerView;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -36,7 +39,7 @@ import java.util.TimerTask;
 public class Five_Five_Activity extends AppCompatActivity {
 
 
-    private final String TAG = "Five_Five_Activity";
+    private boolean isStartTime = false;
     private int[][] datas = new int[5][5];
     private GridView gridView;
     private Five_Five_Adapter adapter;
@@ -52,10 +55,14 @@ public class Five_Five_Activity extends AppCompatActivity {
         public void handleMessage(Message msg) {
             if (msg.what == 0) {
                 times += 1;
-                timeTextView.setText(String.valueOf(times));
+
+                timeTextView.setText("time:    "+times);
             }
         }
     };
+
+    private RelativeLayout bannerAD;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +79,20 @@ public class Five_Five_Activity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-
+        bannerAD = (RelativeLayout) findViewById(R.id.banner_ad);
+        BannerView banner = new BannerView(this, ADSize.BANNER, "1105732337", "2020518677212435");
+        //设置广告轮播时间，为0或30~120之间的数字，单位为s,0标识不自动轮播
+        banner.setRefresh(30);
+        banner.setADListener(new AbstractBannerADListener() {
+            @Override
+            public void onNoAD(int arg0) {
+            }
+            @Override
+            public void onADReceiv() {
+            }
+        });
+        bannerAD.addView(banner);
+        banner.loadAD();
         AlertDialog alertDialog = new AlertDialog.Builder(this)
                 .setCancelable(false)
                 .setTitle("提示")
@@ -86,6 +106,7 @@ public class Five_Five_Activity extends AppCompatActivity {
                                 mHandler.sendEmptyMessage(0);
                             }
                         }, 1000,1000);
+                        isStartTime = true;
                     }
                 })
                 .create();
@@ -189,7 +210,29 @@ public class Five_Five_Activity extends AppCompatActivity {
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        timer.cancel();
+        timer.purge();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(isStartTime) {
+            timer = new Timer(true);
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    mHandler.sendEmptyMessage(0);
+                }
+            }, 1000, 1000);
+        }
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
+        timer.cancel();
     }
 }
